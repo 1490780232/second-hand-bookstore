@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+
+namespace WebApplication1.Controllers
+{
+    public class LoginController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult User()
+        {
+            ViewData["Message"] = "User";
+            return View();
+        }
+
+        public IActionResult Admin()
+        {
+            ViewData["Message"] = "Admin";
+            return View();
+        }
+    }
+}
