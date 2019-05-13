@@ -46,6 +46,9 @@
       <HintPath>..\..\..\..\..\..\BaiduYunDownload\ASP.NET网站开发与项目实战\sample\第21章实例\Sample21-1\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.entityframeworkcore\2.1.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
