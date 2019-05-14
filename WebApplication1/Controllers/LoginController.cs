@@ -9,11 +9,12 @@ namespace WebApplication1.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly bookstoreContext db = new bookstoreContext();
         public IActionResult Index()
         {
-        
-                return View();        
-
+            var Query = (from b in db.BookStatu select b).ToList();
+            ViewData["BookStatu"] = Query;
+            return View();
         }
 
         public IActionResult User()

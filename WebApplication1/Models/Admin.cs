@@ -9,5 +9,6 @@ namespace WebApplication1.Models
         public string AdminName { get; set; }
         public string PhoneNum { get; set; }
         public string Mail { get; set; }
+        public string Password { get; set; }
     }
 }

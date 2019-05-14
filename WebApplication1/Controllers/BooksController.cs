@@ -9,32 +9,22 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class AdminsController : Controller
+    public class BooksController : Controller
     {
         private readonly bookstoreContext _context;
 
-        public AdminsController(bookstoreContext context)
+        public BooksController(bookstoreContext context)
         {
             _context = context;
         }
-        public ActionResult Check(string username, string password)
-        {            
-            foreach(var item in _context.Admin.ToList())
-            {
-                if (username == item.AdminName && password == item.Password)
-                {
-                    return new JsonResult(new { state = "success", message = "登录成功,正在跳转..." });
-                }
-            }
-            return new JsonResult(new { state = "failed", message = "登录失败，请检查您的账户与密码是否正确" });
-        }
-        // GET: Admins
+
+        // GET: Books
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Admin.ToListAsync());          
+            return View(await _context.Book.ToListAsync());
         }
 
-        // GET: Admins/Details/5
+        // GET: Books/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -42,39 +32,39 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admin
-                .FirstOrDefaultAsync(m => m.AdminId == id);
-            if (admin == null)
+            var book = await _context.Book
+                .FirstOrDefaultAsync(m => m.BookId == id);
+            if (book == null)
             {
                 return NotFound();
             }
 
-            return View(admin);
+            return View(book);
         }
 
-        // GET: Admins/Create
+        // GET: Books/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admins/Create
+        // POST: Books/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdminId,AdminName,PhoneNum,Mail")] Admin admin)
+        public async Task<IActionResult> Create([Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(admin);
+                _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(admin);
+            return View(book);
         }
 
-        // GET: Admins/Edit/5
+        // GET: Books/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -82,22 +72,22 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admin.FindAsync(id);
-            if (admin == null)
+            var book = await _context.Book.FindAsync(id);
+            if (book == null)
             {
                 return NotFound();
             }
-            return View(admin);
+            return View(book);
         }
 
-        // POST: Admins/Edit/5
+        // POST: Books/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("AdminId,AdminName,PhoneNum,Mail")] Admin admin)
+        public async Task<IActionResult> Edit(string id, [Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book)
         {
-            if (id != admin.AdminId)
+            if (id != book.BookId)
             {
                 return NotFound();
             }
@@ -106,12 +96,12 @@ namespace WebApplication1.Controllers
             {
                 try
                 {
-                    _context.Update(admin);
+                    _context.Update(book);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AdminExists(admin.AdminId))
+                    if (!BookExists(book.BookId))
                     {
                         return NotFound();
                     }
@@ -122,10 +112,10 @@ namespace WebApplication1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(admin);
+            return View(book);
         }
 
-        // GET: Admins/Delete/5
+        // GET: Books/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -133,30 +123,30 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admin
-                .FirstOrDefaultAsync(m => m.AdminId == id);
-            if (admin == null)
+            var book = await _context.Book
+                .FirstOrDefaultAsync(m => m.BookId == id);
+            if (book == null)
             {
                 return NotFound();
             }
 
-            return View(admin);
+            return View(book);
         }
 
-        // POST: Admins/Delete/5
+        // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var admin = await _context.Admin.FindAsync(id);
-            _context.Admin.Remove(admin);
+            var book = await _context.Book.FindAsync(id);
+            _context.Book.Remove(book);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AdminExists(string id)
+        private bool BookExists(string id)
         {
-            return _context.Admin.Any(e => e.AdminId == id);
+            return _context.Book.Any(e => e.BookId == id);
         }
     }
 }

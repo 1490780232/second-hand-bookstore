@@ -9,32 +9,34 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class AdminsController : Controller
+    public class UsersController : Controller
     {
         private readonly bookstoreContext _context;
 
-        public AdminsController(bookstoreContext context)
+        public UsersController(bookstoreContext context)
         {
             _context = context;
         }
+
         public ActionResult Check(string username, string password)
-        {            
-            foreach(var item in _context.Admin.ToList())
+        {
+            foreach (var item in _context.Users.ToList())
             {
-                if (username == item.AdminName && password == item.Password)
+                if (username == item.UserName && password == item.Password)
                 {
                     return new JsonResult(new { state = "success", message = "登录成功,正在跳转..." });
                 }
             }
             return new JsonResult(new { state = "failed", message = "登录失败，请检查您的账户与密码是否正确" });
         }
-        // GET: Admins
+
+        // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Admin.ToListAsync());          
+            return View(await _context.Users.ToListAsync());
         }
 
-        // GET: Admins/Details/5
+        // GET: Users/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -42,39 +44,39 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admin
-                .FirstOrDefaultAsync(m => m.AdminId == id);
-            if (admin == null)
+            var users = await _context.Users
+                .FirstOrDefaultAsync(m => m.UserId == id);
+            if (users == null)
             {
                 return NotFound();
             }
 
-            return View(admin);
+            return View(users);
         }
 
-        // GET: Admins/Create
+        // GET: Users/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admins/Create
+        // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdminId,AdminName,PhoneNum,Mail")] Admin admin)
+        public async Task<IActionResult> Create([Bind("UserId,UserName,AlipayAccount,ContactInfo,Mail")] Users users)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(admin);
+                _context.Add(users);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(admin);
+            return View(users);
         }
 
-        // GET: Admins/Edit/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -82,22 +84,22 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admin.FindAsync(id);
-            if (admin == null)
+            var users = await _context.Users.FindAsync(id);
+            if (users == null)
             {
                 return NotFound();
             }
-            return View(admin);
+            return View(users);
         }
 
-        // POST: Admins/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("AdminId,AdminName,PhoneNum,Mail")] Admin admin)
+        public async Task<IActionResult> Edit(string id, [Bind("UserId,UserName,AlipayAccount,ContactInfo,Mail")] Users users)
         {
-            if (id != admin.AdminId)
+            if (id != users.UserId)
             {
                 return NotFound();
             }
@@ -106,12 +108,12 @@ namespace WebApplication1.Controllers
             {
                 try
                 {
-                    _context.Update(admin);
+                    _context.Update(users);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AdminExists(admin.AdminId))
+                    if (!UsersExists(users.UserId))
                     {
                         return NotFound();
                     }
@@ -122,10 +124,10 @@ namespace WebApplication1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(admin);
+            return View(users);
         }
 
-        // GET: Admins/Delete/5
+        // GET: Users/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -133,30 +135,30 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admin
-                .FirstOrDefaultAsync(m => m.AdminId == id);
-            if (admin == null)
+            var users = await _context.Users
+                .FirstOrDefaultAsync(m => m.UserId == id);
+            if (users == null)
             {
                 return NotFound();
             }
 
-            return View(admin);
+            return View(users);
         }
 
-        // POST: Admins/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var admin = await _context.Admin.FindAsync(id);
-            _context.Admin.Remove(admin);
+            var users = await _context.Users.FindAsync(id);
+            _context.Users.Remove(users);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AdminExists(string id)
+        private bool UsersExists(string id)
         {
-            return _context.Admin.Any(e => e.AdminId == id);
+            return _context.Users.Any(e => e.UserId == id);
         }
     }
 }

@@ -47,6 +47,7 @@ namespace DAL
             using (bookDbContext db = new bookDbContext())
             {
                 var StudentsQuery = (from b in db.book_info select b).ToList();
+
                 return StudentsQuery;
             }
         }
