@@ -22,5 +22,10 @@ namespace WebApplication1.Controllers
             ViewData["Message"] = "Result";
             return View();
         }
+        public IActionResult ResultDetail()
+        {
+            ViewData["Message"] = "ResultDetail";
+            return View();
+        }
     }
 }

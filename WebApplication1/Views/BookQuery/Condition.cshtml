@@ -14,19 +14,63 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>用户登录</title>
-    <link href="~/css/BookQuery_Condition.css" rel="stylesheet" type="text/css" />
+    <title>书籍查询条件</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div.outer{
+            width:100%;
+            height:500px;
+        }
+        div.outer div.inner {
+            width: 725px;
+            height:60px;
+            margin: 0 auto;
+            padding-top:200px;
+        }
+        div.outer div.inner form.parent{
+            position:relative;
+        }
+        div.outer div.inner form.parent input.search{
+             width:700px;
+             height:60px;
+             border-radius:25px;
+             outline:none;
+             border:1px solid #ccc;
+             padding-left:20px;
+             position:absolute;
+             font-size:22px;
+        }
+        div.outer div.inner form.parent input.btn{
+            width:100px;
+            height:60px;
+            left:600px;
+            position:absolute;
+            border-bottom-right-radius:25px;
+            border-top-right-radius:25px;
+            font-size:22px;
+            font-weight:bold;
+            background-color:#044599;
+            color:#fff;
+        }
+        
+    </style>
     <script type="text/javascript" src="~/js/jquery-1.7.1.js"></script>
     <script type="text/javascript">
 
     </script>
 </head>
 <body>
-    <div class="main">
-        <form id="BookQuery_Form">
-            <input type="text" id="BookCondition"/>
-            <input type="button" value="查询" id="BookCondition_btn"/>
-        </form>
+
+    <div class="outer">
+        <div class="inner">
+            <form id="BookQuery_Form" class="parent">
+                <input type="text" placeholder="请输入书籍名称或关键字" id="BookCondition" class="search"/>
+                <input type="button" value="查询" id="BookCondition_btn" class="btn"/>
+            </form>
+        </div>       
     </div>
 
 </body>
