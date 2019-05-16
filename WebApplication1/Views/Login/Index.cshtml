@@ -1,6 +1,98 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    Layout = null;
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>登陆 - 二手书屋</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/css/login.css" rel="stylesheet">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function loginCheck(who) {
+                var router = who=="user" ? "Users" : "Admins";
+                var $username = $("#" + who + "Name");
+                var $password = $("#" + who + "Password");
+                //  检查表单完整性
+                $("#" + who + "-login-btn").attr('disabled', 'disabled') //禁用登陆按钮
+                $("#" + who + "-login-btn").html("登陆中...")
+                $.ajax({
+                    url: "/" + router + "/Check",
+                    data: {
+                        username: $.trim($username.val()),
+                        password: $.trim($password.val())
+                    },
+                    type: "post",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.state == "success") {
+                            $("#login_info").html(data.message);
+                            window.setTimeout(function () {
+                                window.location.href = "/Home/Index";
+                            }, 500);
+                        }
+                        else {
+                            $("#" + who + "-login-btn").removeAttr('disabled'); //取消禁用
+                            $("#" + who + "-login-btn").html("登陆");
+                            $("#" + who + "name").focus();
+                            alert(data.message);
+                        }
+                    }
+                });
+            }
+            $("#admin-login-btn").click(function () { loginCheck("admin"); });
+            $("#user-login-btn").click(function () { loginCheck("user"); });
+            $(".switch-bar li").click(function () {
+                $(".switch-bar li").removeClass("active");
+                $(this).addClass("active");
+                $("#user-login").toggle();
+            })
+            /*回车事件*/
+            function EnterPress(e) { //传入 event
+                var e = e || window.event;
+                if (e.keyCode == 13) { loginCheck(); }
+            }
+        });
+
+    </script>
+</head>
+<body>
+    <div class="container" id="login-box">
+        <div class="switch-bar">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="javascript:void(0);" style="border-left: 0px;">用户登录</a></li>
+                <li><a href="javascript:void(0);" style="border-right: 0px;">管理员登录</a></li>
+            </ul>
+        </div>
+        <form class="form-signin" id="user-login">
+            <label for="userName" class="sr-only">账户</label>
+            <input type="text" id="userName" class="form-control" placeholder="用户账号" required="" autofocus="">
+            <label for="userPassword" class="sr-only">密码</label>
+            <input type="password" id="userPassword" class="form-control" placeholder="密码" required="">
+            <button class="btn btn-lg btn-primary btn-block" id="user-login-btn">登陆</button>
+        </form>
+        <form class="form-signin" id="admin-login">
+            <label for="adminName" class="sr-only">账户</label>
+            <input type="text" id="adminName" class="form-control" placeholder="管理员账号" required="" autofocus="">
+            <label for="adminPassword" class="sr-only">密码</label>
+            <input type="password" id="adminPassword" class="form-control" placeholder="密码" required="">
+            <button class="btn btn-lg btn-primary btn-block" id="admin-login-btn">登陆</button>
+        </form>
+    </div> <!-- /container -->
+
+</body>
+</html>

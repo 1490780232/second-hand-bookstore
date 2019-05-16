@@ -11,9 +11,7 @@ namespace WebApplication1.Controllers
     {
         private readonly bookstoreContext db = new bookstoreContext();
         public IActionResult Index()
-        {
-            var Query = (from b in db.BookStatu select b).ToList();
-            ViewData["BookStatu"] = Query;
+        {          
             return View();
         }
 
