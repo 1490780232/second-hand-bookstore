@@ -20,57 +20,109 @@
             margin: 0;
             padding: 0;
         }
-        div.outer{
-            width:100%;
-            height:500px;
+
+        div.outer {
+            width: 100%;
+            height: 500px;
         }
-        div.outer div.inner {
-            width: 725px;
-            height:60px;
-            margin: 0 auto;
-            padding-top:200px;
-        }
-        div.outer div.inner form.parent{
-            position:relative;
-        }
-        div.outer div.inner form.parent input.search{
-             width:700px;
-             height:60px;
-             border-radius:25px;
-             outline:none;
-             border:1px solid #ccc;
-             padding-left:20px;
-             position:absolute;
-             font-size:22px;
-        }
-        div.outer div.inner form.parent input.btn{
-            width:100px;
-            height:60px;
-            left:600px;
-            position:absolute;
-            border-bottom-right-radius:25px;
-            border-top-right-radius:25px;
-            font-size:22px;
-            font-weight:bold;
-            background-color:#044599;
-            color:#fff;
-        }
-        
+
+            div.outer div.inner {
+                width: 725px;
+                height: 60px;
+                margin: 0 auto;
+                padding-top: 200px;
+            }
+
+                div.outer div.inner form.parent {
+                    position: relative;
+                }
+
+                    div.outer div.inner form.parent input.search {
+                        width: 700px;
+                        height: 60px;
+                        border-radius: 25px;
+                        outline: none;
+                        border: 1px solid #ccc;
+                        padding-left: 20px;
+                        position: absolute;
+                        font-size: 22px;
+                    }
+
+                    div.outer div.inner form.parent input.btn {
+                        width: 100px;
+                        height: 60px;
+                        left: 600px;
+                        position: absolute;
+                        border-bottom-right-radius: 25px;
+                        border-top-right-radius: 25px;
+                        font-size: 22px;
+                        font-weight: bold;
+                        background-color: #044599;
+                        color: #fff;
+                    }
     </style>
     <script type="text/javascript" src="~/js/jquery-1.7.1.js"></script>
+    <link href="~/css/login_css.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
+        $(document).ready(function () {
+            function loginCheck() {
+                var $bookname = $("#BookCondition");
+                //  检查表单完整性
+                if ($bookname.val() == "") {
+                    $bookname.focus();
+                    $("#login_info").html("请输入书籍信息");
+                    return false;
+                }
+                else {
+                    window.location.href="/BookQuery/Result"
+                    $("#loginButton").attr('disabled', 'disabled') //禁用登陆按钮
+                    $("#login_info").html("登陆中...");
+                    $.ajax({
+                        url: "/Admins/Check",
+                        data: {
+                            username: $.trim($username.val()),
+                            password: $.trim($password.val())
+                        },
+                        type: "post",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.state == "success") {
+                                $("#login_info").html(data.message);
+                                window.setTimeout(function () {
+                                    window.location.href = "/Home/Index";
+                                }, 500);
+                            }
+                            else {
+                                $("#loginButton").removeAttr('disabled'); //取消禁用
+                                $("#login_info").html(data.message);
+                            }
+                        }
+                    });
+                }
+            }
+            $("#BookCondition_btn").click(function () { loginCheck(); })
+            /*回车事件*/
+            function EnterPress(e) { //传入 event
+                var e = e || window.event;
+                if (e.keyCode == 13) { loginCheck(); }
+            }
+        });
+
 
     </script>
 </head>
 <body>
 
     <div class="outer">
+        <div >
+            <span id="login_info" class="sty_txt2"></span>
+        </div>
         <div class="inner">
             <form id="BookQuery_Form" class="parent">
-                <input type="text" placeholder="请输入书籍名称或关键字" id="BookCondition" class="search"/>
-                <input type="button" value="查询" id="BookCondition_btn" class="btn"/>
+                <input type="text" placeholder="请输入书籍名称或关键字" id="BookCondition" class="search" />
+                <input type="button" value="查询" id="BookCondition_btn" class="btn" />
             </form>
-        </div>       
+        </div>
     </div>
 
 </body>
