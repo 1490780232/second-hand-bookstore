@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "OrderQuery";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户登录</title>
+    <link href="~/css/OrderQuery_css.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/js/jquery-1.7.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url: "/Purchase/GetData",
+                type: "post",
+                cache: false,
+                //dataType: "json",
+                success: function (data) {
+                    try {
+                        var tmpData = $.parseJSON(data/*.Data*/);
+                        for (var i = 0; i < tmpData.length; i++) {
+                            var newRow = '<tr><td>' + tmpData[i].OrderId + '</td><td>'
+                                + tmpData[i].BookId + '</td><td>'
+                                + tmpData[i].BookName + '</td><td>'
+                                + tmpData[i].Press + '</td><td>'
+                                + tmpData[i].Author + '</td><td>'
+                                + tmpData[i].UserId + '</td><td>'
+                                + tmpData[i].OrderTime + '</td><td>'
+                                + tmpData[i].OrderPrice+ '</td> <td></tr>';
+                            $('tbody').append(newRow);
+
+                        }
+
+                    }
+                    catch (err) {
+                        alert("数据获取失败:" + err.message);
+                    }
+                },
+                error: function (response) {
+                    alert("数据获取失败，原因：超时或错误号:" + response.status + ",请稍后再试。");
+
+                }
+
+            });
+
+        });
+     
+    </script>
+</head>
+<body>
+    <div class="main">
+        <p>历史订单查询</p>
+        <form id="OrderQuery_Form" action="" method="post">
+            日期：
+            <input type="date" />
+            至
+            <input type="date" />
+            <input type="button" id="OrderQuery_btn" value="提交" />
+        </form>
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th>书籍编号</th>
+                    <th>书籍名称</th>
+                    <th>出版社</th>
+                    <th>作者名</th>
+                    <th>卖家id</th>
+                    <th>订单时间</th>
+                    <th>实付款</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+               
+                    @*<tr>
+                        <td>@ViewData["Order"]</td>
+                    </tr>
+               
+                <tr>
+
+
+                    <td>不会写js。。</td>
+                </tr>*@
+            </tbody>
+
+        </table>
+    </div>
+
+</body>
+</html>
