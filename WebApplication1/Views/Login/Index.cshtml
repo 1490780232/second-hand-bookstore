@@ -40,9 +40,10 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.state == "success") {
-                            $("#login_info").html(data.message);
+                            document.cookie="username="+data.username+";useType="+data.userType+";";
+                            $("#" + who + "-login-btn").html(data.message);                            
                             window.setTimeout(function () {
-                                window.location.href = "/Home/Index";
+                                window.location.href = "/Users/Index";
                             }, 500);
                         }
                         else {
@@ -54,8 +55,16 @@
                     }
                 });
             }
+            function login(){
+                document.cookie="username=logtxt; useType=user;";
+                $("#user-login-btn").html("登陆成功");                            
+                window.setTimeout(function () {
+                    window.location.href = "/Home/Index";
+                })
+            }
             $("#admin-login-btn").click(function () { loginCheck("admin"); });
-            $("#user-login-btn").click(function () { loginCheck("user"); });
+            <!-- $("#user-login-btn").click(function () { loginCheck("user"); }); -->
+            $("#user-login-btn").click(function () { login(); });
             $(".switch-bar li").click(function () {
                 $(".switch-bar li").removeClass("active");
                 $(this).addClass("active");

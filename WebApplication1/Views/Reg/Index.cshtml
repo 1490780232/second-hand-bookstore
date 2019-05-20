@@ -1,0 +1,52 @@
+@model WebApplication1.Models.Users
+
+@{
+    ViewData["Title"] = "用户注册 - 二手书屋";
+}
+
+
+<div style="border:1px solid #fff">
+    <div style="width:300px; margin:0 auto;">
+        <!-- <h4>用户注册</h4> -->
+        <hr />
+        <form >            
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlipayAccount" class="control-label"></label>
+                <input asp-for="AlipayAccount" class="form-control" />
+                <span asp-validation-for="AlipayAccount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactInfo" class="control-label"></label>
+                <input asp-for="ContactInfo" class="form-control" />
+                <span asp-validation-for="ContactInfo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mail" class="control-label"></label>
+                <input asp-for="Mail" class="form-control" />
+                <span asp-validation-for="Mail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block" id="user-signup-btn">注册</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script >
+    
+</script>
