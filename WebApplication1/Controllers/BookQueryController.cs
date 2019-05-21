@@ -35,9 +35,32 @@ namespace WebApplication1.Controllers
             ViewData["Message"] = "Result";
             return View();
         }
-        public IActionResult ResultDetail()
+        public IActionResult ResultDetail(string id)
         {
             ViewData["Message"] = "ResultDetail";
+            var orderList = from p in _context.Book
+                            join b in _context.BookStatu
+                            on p.BookId equals b.BookId
+                            join person in _context.Users
+                            on b.SellerId equals person.UserId
+                            where p.BookId.Contains(id)
+                            select new
+                            {
+                                BookId = p.BookId,
+                                BookCase=b.BookcaseId,
+                                BookName = p.BookName,
+                                SalerId=b.SellerId,
+                                SalerName=person.UserName,
+                                SalerContact=person.ContactInfo,
+                                BookIbsn = p.BookIbsn,
+                                Author = p.Author,
+                                Press = p.Press,
+                                OriPrice = p.OriPrice,
+                                CurrPrice = p.CurrPrice
+                            };
+            // var orderList = _context.Order.ToList();
+            string getList = JsonConvert.SerializeObject(orderList);  //序列化
+                                                                      // return new JsonResult(new { Data = getList });
             return View();
         }
 
@@ -57,7 +80,7 @@ namespace WebApplication1.Controllers
                             };
             // var orderList = _context.Order.ToList();
             string getList = JsonConvert.SerializeObject(orderList);  //序列化
-                                                                      // return new JsonResult(new { Data = getList });
+            ViewData["data"] = getList;                                                  // return new JsonResult(new { Data = getList });
             return getList;
         }
     }
