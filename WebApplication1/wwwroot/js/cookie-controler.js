@@ -1,7 +1,7 @@
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     var expires = d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    document.cookie = cname + "=" + cvalue + ";" + expires;
+    document.cookie = cname + "=" + cvalue + ";domain=localhost" + expires+"path=/";
 }
 
 function getCookie(cname) {

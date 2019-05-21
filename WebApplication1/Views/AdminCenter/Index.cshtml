@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>个人中心</title>
+    <title>管理中心</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
@@ -58,24 +58,15 @@
         </div>
 
         <div class="topnav">
-            <a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="001">信息修改</a>
-            <a asp-area="" asp-controller="Purchase" asp-action="OrderQuery">寄卖状态查询</a>
-            <a href="#">图书超期查询</a>
-            <a asp-area="" asp-controller="Purchase" asp-action="OrderQuery">订单查询</a>
-            <a asp-area="" asp-controller="Books" asp-action="Create">图书发布</a>
-            <a asp-area="" asp-controller="Purchase" asp-action="OrderQuery">图书定位</a>
-            <a asp-area="" asp-controller="Purchase" asp-action="OrderQuery">图书购买</a>
+            <a asp-area="" asp-controller="Users" asp-action="Index">图书管理</a>
+            <a asp-area="" asp-controller="Books" asp-action="Index">用户管理</a>
+            <a asp-area="" asp-controller="Orders" asp-action="Index">订单管理</a>
+            <a asp-area="" asp-controller="CheckBooks" asp-action="Index">书籍审核</a>
         </div>
 
-            <br />
-            <p><img src=~/images/PC/太阳.png width="30" height="30" align="middle" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspID</p>
-            <p><img src=~/images/PC/电脑.png width="30" height="30" align="middle" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名字</p>
-            <p><img src=~/images/PC/记事本.png width="30" height="30" align="middle" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp支付账户</p>
-            <p><img src=~/images/PC/电话.png width="30" height="30" align="middle" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp联系方式</p>
-            <p><img src=~/images/PC/邮件.png width="30" height="30" align="middle" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp邮箱</p>
-
+       
     </div>
-    <hr width="80%"/>
+    <hr width="80%" />
 </body>
 </html>
 

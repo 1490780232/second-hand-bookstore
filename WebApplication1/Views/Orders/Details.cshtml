@@ -1,0 +1,48 @@
+﻿@model WebApplication1.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BookId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderStatus)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.OrderId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

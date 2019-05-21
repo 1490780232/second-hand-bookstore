@@ -40,12 +40,19 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.state == "success") {
-                            document.cookie="username="+data.username+";";
-                            document.cookie="userType="+data.userType+";";
-                            $("#" + who + "-login-btn").html(data.message);                            
-                            window.setTimeout(function () {
-                                window.location.href = "/Users/Index";
-                            }, 500);
+                            document.cookie="username="+data.username+";path=/";
+                            document.cookie = "userType=" + data.userType +";path=/";
+                            $("#" + who + "-login-btn").html(data.message);  
+                            if (who == "user") {
+                                window.setTimeout(function () {
+                                    window.location.href = "/PersonalCenter/PersonalCenter";
+                                }, 500);
+                            }
+                            else {
+                                window.setTimeout(function () {
+                                    window.location.href = "/AdminCenter/Index";
+                                }, 500);
+                            }
                         }
                         else {
                             $("#" + who + "-login-btn").removeAttr('disabled'); //取消禁用
@@ -78,7 +85,7 @@
         <div class="switch-bar">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="javascript:void(0);" style="border-left: 0px;">用户登录</a></li>
-                <li><a href="javascript:void(0);" style="border-right: 0px;">管理员登录</a></li>
+                <li><a href="javascript:void(0);" style="border-right: 0px;">管理登录</a></li>
             </ul>
         </div>
         <form class="form-signin" id="user-login">
