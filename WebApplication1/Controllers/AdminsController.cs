@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
             {
                 if (username == item.AdminName && password == item.Password)
                 {
-                    return new JsonResult(new { state = "success", message = "登录成功,正在跳转..." });
+                    return new JsonResult(new { state = "success", message = "登录成功,正在跳转...",username=username,userType="admin" });
                 }
             }
             return new JsonResult(new { state = "failed", message = "登录失败，请检查您的账户与密码是否正确" });

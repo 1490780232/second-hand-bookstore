@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>@ViewData["Title"] - 二手书屋</title>
-
+    <script src="~/js/cookie-controler.js"></script>
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />        
         <link rel="stylesheet" href="~/css/site.css" />
@@ -20,7 +20,7 @@
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div class="container" id="app">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -36,6 +36,14 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="About">关于</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">联系我们</a></li>
                 </ul>
+                <ul class="nav navbar-nav pull-right" id="login-box" style="display: none;">
+                    <li><a asp-area="" asp-controller="Login" asp-action="Index">登陆</a></li>
+                    <li><a asp-area="" asp-controller="Reg" asp-action="Index">注册</a></li>
+                </ul>
+                <ul class="nav navbar-nav pull-right" id="personal-center" style="display: none;">
+                    <li><a asp-area="" asp-controller="PersonalCenter" asp-action="PersonalCenter">个人中心</a></li> 
+                    <li><a href="javascript:logout()">退出</a></li>                      
+                </ul>                
             </div>
         </div>
     </nav>
@@ -46,13 +54,15 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - WebApplication1</p>
+            <p>&copy; 2019 - 二手书屋</p>
         </footer>
     </div>
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/Vue.js/vue.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
@@ -70,7 +80,21 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
+        <script>
+            var type=getCookie("userType");
+            if(type==''){
+                $("#login-box").show();
+            }else if(type=="users"){
+                $("#personal-center").show();
+            };
+            var logout = function (){
+                //var path_ = "path=/", domain_ = "domain=.baidu.com";
+                //document.cookie = cname + "=" + cvalue + "; " + domain_ + "; " + expires + "; " + path_;
+                document.cookie = "username=;domain=localhost; expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                document.cookie = "userType=;domain=localhost; expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                window.location.href="/BookQuery/Condition"
+            }
+        </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
