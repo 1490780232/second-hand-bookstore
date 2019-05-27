@@ -7,10 +7,12 @@
 
 <html>
 <head>
-    <title>Home</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    
+    <title>@ViewData["Title"] - 二手书屋</title>
+    
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/assets/vendor/font-awesome/css/font-awesome.min.css">
@@ -18,7 +20,10 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="~/assets/css/main.css">
     <!-- GOOGLE FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+    <script src="~/js/cookie-controler.js"></script>
 </head>
 
 <body>
@@ -26,7 +31,7 @@
     <div id="wrapper">
         <!-- NAVBAR -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid" id="app">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -34,7 +39,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">二手书屋</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="height: 72px;padding: 18px 30px;font-size: 30px;line-height: 36px;">二手书屋</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav pull-right" id="login-box" style="display:;">
@@ -69,12 +74,10 @@
         <!-- END LEFT SIDEBAR -->
         <!-- MAIN -->
         <div class="main">
-            <!-- MAIN CONTENT -->
-            <div class="main-content">
+            <!-- MAIN CONTENT -->            
                 <div class="container-fluid">
                     @RenderBody()
-                </div>
-            </div>
+                </div>            
             <!-- END MAIN CONTENT -->
         </div>
         <!-- END MAIN -->
@@ -88,9 +91,7 @@
     <!-- END WRAPPER -->
     <!-- Javascript -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>        
-    <script src="~/assets/scripts/klorofil-common.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>           
 </body>
 
 </html>

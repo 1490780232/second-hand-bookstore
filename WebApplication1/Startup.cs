@@ -55,7 +55,7 @@ namespace WebApplication1
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=BookQuery}/{action=Condition}");
+                    template: "{controller=Home}/{action=Index}");
             });
         }
     }
