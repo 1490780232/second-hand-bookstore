@@ -35,3 +35,10 @@ body {
         display: none;
     }
 }
+.navbar-brand {
+    float: left;
+    height: 72px;
+    padding: 18px 15px;
+    font-size: 30px;
+    line-height: 36px;
+}
