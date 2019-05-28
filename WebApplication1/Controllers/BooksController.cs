@@ -35,15 +35,15 @@ namespace WebApplication1.Controllers
             int a=_context.Book.Count();
             string id = Convert.ToString(a);
 
-            try
-            {
+            //try
+            //{
                 book1 = JsonConvert.DeserializeObject<Book>(book);
                 book1.BookId = "00" + id;
-            }
-            catch
-            {
-                return new JsonResult(new { state = "failed", message = "json转换失败" });
-            }
+            //}
+            //catch
+            //{
+            //    return new JsonResult(new { state = "failed", message = "json转换失败" });
+            //}
 
             bool flag = connect();
             if (flag == false)
