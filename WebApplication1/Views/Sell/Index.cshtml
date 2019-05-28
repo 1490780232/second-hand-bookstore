@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "卖书";
+}
+
+<h2>买书流程</h2>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">书籍ISBN</label>
+                    <input id="BookISBN" type="text" />
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">书籍名称</label>
+                    <input id="BookName" type="text" />
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">作者</label>
+                    <input id="author" type="text" />
+                </div><div class="control-group">
+                    <label class="control-label" for="inputEmail">出版社</label>
+                    <input id="press" type="text" />
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">书籍原价</label>
+                    <input id="oriPrice" type="text" />
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">出手价格</label>
+                    <input id="inputEmail" type="text" />
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">类别</label>
+                    <select>
+                        <option>计算机类</option>
+                        <option>数理科学</option>
+                        <option>文学</option>
+                        <option>社会科学</option>
+                        <option>其他</option>
+                    </select>
+                </div>
+                <div class="control-group" style="display:none;">
+                    <label class="control-label" for="inputEmail">卖家姓名</label>
+                    <input id="username" type="text" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
