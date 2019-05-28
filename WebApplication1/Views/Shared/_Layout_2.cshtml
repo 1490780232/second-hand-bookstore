@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/assets/vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/assets/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="~/assets/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="~/assets/vendor/chartist/css/chartist-custom.css">
+    <script src="~/assets/vendor/chartist/js/chartist.min.js"></script>
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="~/assets/css/main.css">
     <!-- GOOGLE FONTS -->
@@ -25,6 +28,17 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="~/lib/Vue.js/vue.js"></script>
     <script src="~/js/cookie-controler.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <style type="text/css">
+        #body_render {
+            padding-left: 30px;
+        }
+
+        #main_padding {
+            padding-top: 15px;
+        }
+    </style>
 </head>
 
 <body>
@@ -96,9 +110,9 @@
         </div>
         <!-- END LEFT SIDEBAR -->
         <!-- MAIN -->
-        <div class="main">
+        <div class="main" id="main_padding">
             <!-- MAIN CONTENT -->
-            <div class="container-fluid">
+            <div class="container-fluid" id="body_render">
                 @RenderBody()
             </div>
             <!-- END MAIN CONTENT -->
@@ -113,7 +127,7 @@
     </div>
     <!-- END WRAPPER -->
     <!-- Javascript -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
         var type = getCookie("userType");

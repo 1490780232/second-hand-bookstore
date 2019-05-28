@@ -5,13 +5,51 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebApplication1.Models;
+using ModuleTech;
 
 namespace WebApplication1.Controllers
 {
     public class BooksController : Controller
     {
         private readonly bookstoreContext _context;
+
+        public Reader re;
+        public bool connect()
+        {
+            try
+            {
+                re = Reader.Create("192.168.0.102", ModuleTech.Region.NA, 1);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public ActionResult PublicBook(string book)
+        {
+            Book book1  = JsonConvert.DeserializeObject<Book>(book);
+            bool flag = connect();
+            if (flag == false)
+            {
+                return new JsonResult(new { state = "failed", message = "固定读写器未连接上" });
+            }
+
+            try
+            {
+                string s = book1.BookId;
+                TagData epccode = new TagData(s);
+                re.WriteTag(null, epccode);
+                return new JsonResult(new { state = "true", message = "发布成功" });
+            }
+            catch
+            {
+                return new JsonResult(new { state = "failed", message = "未成功写入RFID" });
+            }
+            
+        }
 
         public BooksController(bookstoreContext context)
         {
