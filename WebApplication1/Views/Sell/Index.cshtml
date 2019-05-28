@@ -3,38 +3,38 @@
     ViewData["Title"] = "卖书";
 }
 
-<h2>买书流程</h2>
+<h2>卖书流程</h2>
 
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
-            <form class="form-horizontal">
+            <form class="form-horizontal" id="sell-form">
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">书籍ISBN</label>
-                    <input id="BookISBN" type="text" />
+                    <input id="BookISBN" type="text" v-model="book.BookISBN"/>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">书籍名称</label>
-                    <input id="BookName" type="text" />
+                    <input id="BookName" type="text" v-model="book.BookName"/>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">作者</label>
-                    <input id="author" type="text" />
+                    <input id="author" type="text" v-model="book.author"/>
                 </div><div class="control-group">
                     <label class="control-label" for="inputEmail">出版社</label>
-                    <input id="press" type="text" />
+                    <input id="press" type="text" v-model="book.press"/>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">书籍原价</label>
-                    <input id="oriPrice" type="text" />
+                    <input id="oriPrice" type="text" v-model="book.oriPrice"/>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">出手价格</label>
-                    <input id="inputEmail" type="text" />
+                    <input id="currPrice" type="text" v-model="book.currPrice"/>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">类别</label>
-                    <select>
+                    <select id="category" v-model="book.category">
                         <option>计算机类</option>
                         <option>数理科学</option>
                         <option>文学</option>
@@ -44,10 +44,48 @@
                 </div>
                 <div class="control-group" style="display:none;">
                     <label class="control-label" for="inputEmail">卖家姓名</label>
-                    <input id="username" type="text" />
+                    <input id="username" type="text" v-model="book.username"/>
                 </div>
-
+                <a class="btn" contenteditable="true" type="submit" onclick="commit()">提交</a>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    var sellapp = new Vue({
+        el: "#sell-form",
+        data: {
+            book: {
+                BookID: "123",
+                BookName: "",
+                BookISBN: "",
+                author: "",
+                press: "",
+                oriPrice: "",
+                currPrice: "",
+                category: "",
+                userName: getCookie("username"),
+            },
+        }
+    })
+    function commit() {
+        $.ajax({
+        url: "/Books/PublicBook",
+        data: {
+            book: JSON.stringify(sellapp.book)
+        },
+        type: "post",
+        dataType: "json",
+        success: function (data) {
+            if (data.state == "success") {
+                alert(成功)
+            }
+            else {                
+                alert(data.message);
+            }
+        }
+    });
+    }
+    
+</script>

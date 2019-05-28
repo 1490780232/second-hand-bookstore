@@ -39,6 +39,14 @@
 
 
   <ItemGroup>
+    <Reference Include="ModuleAPI">
+      <HintPath>..\..\..\OneDrive\桌面\ModuleAPI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+
+  <ItemGroup>
     <Content Update="Views\UserCenter\MyOrder.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
