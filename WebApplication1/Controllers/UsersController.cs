@@ -30,6 +30,11 @@ namespace WebApplication1.Controllers
             return new JsonResult(new { state = "failed", message = "登录失败，请检查您的账户与密码是否正确" });
         }
 
+        public async Task<IActionResult> OperateUsers()
+        {
+            return View(await _context.Users.ToListAsync());
+        }
+
         // GET: Users
         public async Task<IActionResult> Index()
         {

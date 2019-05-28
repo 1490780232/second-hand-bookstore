@@ -11,5 +11,9 @@ namespace WebApplication1.Models
         public DateTime? OrderTime { get; set; }
         public int? OrderPrice { get; set; }
         public int? OrderStatus { get; set; }
+        public string bookName { get; set; }
+        public string buyerName { get; set; }
+        public string salerName { get; set; }
+        public string salerID { get; set; }
     }
 }
