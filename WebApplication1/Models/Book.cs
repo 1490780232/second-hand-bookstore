@@ -13,6 +13,6 @@ namespace WebApplication1.Models
         public string Press { get; set; }
         public int CurrPrice { get; set; }
         public string category { get; set; }
-
+        public string userName { get; set; }
     }
 }
