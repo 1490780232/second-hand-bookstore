@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "个人中心";
+}
+<link rel="stylesheet" href="~/css/user-center.css" />
+
+<ul class="nav nav-tabs nav-justified">
+    <li role="presentation" class="active"><a href="javascript:void(0);">交易统计</a></li>
+    <li role="presentation"><a href="/UserCenter/UserInform">个人信息</a></li>
+    <li role="presentation"><a href="/UserCenter/ChecckInform">审核查询</a></li>    
+    <li role="presentation"><a href="/UserCenter/Favorite">收藏夹</a></li>
+    <li role="presentation"><a href="/UserCenter/MyOrder">订单查询</a></li>
+</ul>
+
+<div class="info-box" id="info-box">
+    <div class="boook-info" v-for="item in books_inform">        
+        <span>{{ item.label }}</span><span>{{ item.num }}本</span>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        el: "#info-box",
+        data: {
+            books_inform: [
+                { label: "当前买入：", num: 3 },
+                { label: "当前卖出：", num: 3 },
+                { label: "即将超期：", num: 1 },
+                { label: "已经超期：", num: 2 },
+
+            ],
+        }
+    });
+</script>

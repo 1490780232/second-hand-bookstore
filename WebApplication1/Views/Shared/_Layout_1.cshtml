@@ -7,10 +7,12 @@
 
 <html>
 <head>
-    <title>Home</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>@ViewData["Title"] - 二手书屋</title>
+
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/assets/vendor/font-awesome/css/font-awesome.min.css">
@@ -18,7 +20,11 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="~/assets/css/main.css">
     <!-- GOOGLE FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/Vue.js/vue.js"></script>
+    <script src="~/js/cookie-controler.js"></script>
 </head>
 
 <body>
@@ -26,7 +32,7 @@
     <div id="wrapper">
         <!-- NAVBAR -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid" id="app">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -34,10 +40,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">二手书屋</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="height: 72px;padding: 18px 30px;font-size: 30px;line-height: 36px;">二手书屋</a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav pull-right" id="login-box" style="display:;">
+                    <ul class="nav navbar-nav pull-right" id="login-box" style="display:none;">
                         <li><a asp-area="" asp-controller="Login" asp-action="Index">登陆</a></li>
                         <li><a asp-area="" asp-controller="Reg" asp-action="Index">注册</a></li>
                     </ul>
@@ -69,17 +75,15 @@
         <!-- END LEFT SIDEBAR -->
         <!-- MAIN -->
         <div class="main">
-            <!-- MAIN CONTENT -->
-            <div class="main-content">
+            <!-- MAIN CONTENT -->            
                 <div class="container-fluid">
                     @RenderBody()
-                </div>
-            </div>
+                </div>            
             <!-- END MAIN CONTENT -->
         </div>
         <!-- END MAIN -->
         <div class="clearfix"></div>
-        <footer>
+        <footer style="position:static">
             <div class="container-fluid">
                 <p class="copyright">Copyright &copy; 2019.</p>
             </div>
@@ -89,8 +93,21 @@
     <!-- Javascript -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>        
-    <script src="~/assets/scripts/klorofil-common.js"></script>
+    <script>
+        var type = getCookie("userType");
+        if (type == '') {
+            $("#login-box").show();
+        } else if (type == "users") {
+            $("#personal-center").show();
+        };
+        var logout = function () {
+            //var path_ = "path=/", domain_ = "domain=.baidu.com";
+            //document.cookie = cname + "=" + cvalue + "; " + domain_ + "; " + expires + "; " + path_;
+            document.cookie = "username=;domain=localhost; expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            document.cookie = "userType=;domain=localhost; expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            window.location.href = "/Home/Index"
+        }
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,49 @@
+﻿.box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+    .box > .span3 {
+    }
+
+        .box > .span3 > span {
+            display: block;
+            text-align: center;
+        }
+
+            .box > .span3 > span:first-child {
+                font-size: 30px;
+            }
+
+        .box > .span3 > .img-box {
+            height: 150px;
+            width: 150px;
+            margin: 10px 30px;
+        }
+
+        .box > .span3 > .img-box-2 {
+            padding: 0 25px;
+            background-color: #ffffff;
+        }
+
+        .box > .span3 > .img-box > img {
+            width: 100%;
+            height: auto;
+        }
+
+        .box > .span3 > .img-box + span {
+            display: inline-block;
+            width: 210px;
+            text-align: center;
+        }
+
+.row-fluid > .span12 > h3 > i {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(/images/home/hot.png);
+    position: relative;
+    top: -15px;
+    left: -5px;
+}

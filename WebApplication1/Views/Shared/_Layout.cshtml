@@ -9,7 +9,12 @@
     <script src="~/js/cookie-controler.js"></script>
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<<<<<<< HEAD
         <link rel="stylesheet" href="~/css/site.css" />
+=======
+        <link rel="stylesheet" href="~/assets/css/main.css" />
+        <link rel="stylesheet" href="~/css/site.css" />        
+>>>>>>> a10695269c19dc882f6d13582c60e4949ea57916
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -19,6 +24,7 @@
     </environment>
 </head>
 <body>
+<<<<<<< HEAD
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container" id="app">
             <div class="navbar-header">
@@ -44,10 +50,56 @@
                     <li><a asp-area="" asp-controller="PersonalCenter" asp-action="PersonalCenter">个人中心</a></li>
                     <li><a href="javascript:logout()">退出</a></li>
                 </ul>
+=======
+    <!-- WRAPPER -->
+    <div id="wrapper">
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">二手书屋</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav pull-right" id="login-box" style="display:;">
+                        <li><a asp-area="" asp-controller="Login" asp-action="Index">登陆</a></li>
+                        <li><a asp-area="" asp-controller="Reg" asp-action="Index">注册</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right" id="personal-center" style="display: none;">
+                        <li><a asp-area="" asp-controller="PersonalCenter" asp-action="PersonalCenter">个人中心</a></li>
+                        <li><a href="javascript:logout()">退出</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- END NAVBAR -->
+        <partial name="_CookieConsentPartial" />
+        <!-- LEFT SIDEBAR -->
+        <div id="sidebar-nav" class="sidebar">
+            <div class="sidebar-scroll">
+                <nav>
+                    <ul class="nav">
+                        <li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>主页</span></a></li>
+                        <li>
+                            <a href="elements.html" class=""><i class="lnr lnr-chart-bars"></i> <span>购书推荐</span></a>
+                        </li>
+                        <li>
+                            <a href="charts.html" class=""><i class="lnr lnr-linearicons"></i> <span>购书入口</span></a>
+                        </li>
+                        <li><a href="panels.html" class=""><i class="lnr lnr-alarm"></i> <span>卖书入口</span></a></li>
+                    </ul>
+                </nav>
+>>>>>>> a10695269c19dc882f6d13582c60e4949ea57916
             </div>
         </div>
     </nav>
 
+<<<<<<< HEAD
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
@@ -96,5 +148,37 @@
         }
     </script>
     @RenderSection("Scripts", required: false)
+=======
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; 2019 - WebApplication1</p>
+            </footer>
+        </div>
+
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+            </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        @RenderSection("Scripts", required: false)
+>>>>>>> a10695269c19dc882f6d13582c60e4949ea57916
 </body>
 </html>
