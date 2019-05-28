@@ -4,7 +4,7 @@
 }
 
 
-@{ Layout = "../Shared/_layout_1.cshtml"; }
+@{ Layout = "../Shared/_layout_2.cshtml"; }
 @model IEnumerable<WebApplication1.Models.BookStatistics>
 
 <!doctype html>
@@ -50,70 +50,6 @@
     <!-- ICONS -->
     <link rel="apple-touch-icon" sizes="76x76" href="~/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" sizes="96x96" href="~/assets/img/favicon.png">
-
-
-
-
-</head>
-<body>
-    <h3 class="page-title">书籍统计图表</h3>
-
-    <h3 class="page-title">统计</h3>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">统计折线图</h3>
-                </div>
-                <div class="panel-body">
-                    <div id="demo-line-chart" class="ct-chart"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">统计柱状图</h3>
-                </div>
-                <div class="panel-body">
-                    <div id="demo-bar-chart" class="ct-chart"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Area Chart</h3>
-                </div>
-                <div class="panel-body">
-                    <div id="demo-area-chart" class="ct-chart"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Multiple Chart</h3>
-                </div>
-                <div class="panel-body">
-                    <div id="multiple-chart" class="ct-chart"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-    @*</div>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
@@ -133,7 +69,7 @@
 
             var data = {
                 labels: ['一月', '二月', '三月', '四月', '五月'],
-   
+
                 series: [
                     [200, 380, 350, 320, 410],
                 ]
@@ -221,6 +157,70 @@
 
         });
     </script>
+
+
+</head>
+<body>
+    <h3 class="page-title">书籍统计图表</h3>
+
+    <h3 class="page-title">统计</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">统计折线图</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="demo-line-chart" class="ct-chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">统计柱状图</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="demo-bar-chart" class="ct-chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Area Chart</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="demo-area-chart" class="ct-chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Multiple Chart</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="multiple-chart" class="ct-chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    @*</div>*@
+
+
 </body>
 <!-- END WRAPPER -->
 <!-- Javascript -->

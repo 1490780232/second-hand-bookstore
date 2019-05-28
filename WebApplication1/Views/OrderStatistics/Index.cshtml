@@ -1,10 +1,15 @@
 ﻿@model IEnumerable<WebApplication1.Models.OrderStatistics>
-@{ Layout = "../Shared/_layout_1.cshtml"; }
+@{ Layout = "../Shared/_layout_2.cshtml"; }
+@{int a = 0; int b = 0;}
+@foreach (var item in Model)
+{
+    a += item.TotalValue;
+    b += item.BookNum;
+
+}
 <h2>订单统计</h2>
 
-<p>
-    <a asp-action="Create">增加</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -40,45 +45,12 @@
                 </td>
             </tr>
         }
-    </tbody>
-</table>
-
-
-
-
-
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BookNum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalValue)
-            </th>
-            <th></th>
+            <td>总计</td>
+            <td>@a</td>
+            <td>@b  </td>
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookNum)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalValue)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.time">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.time">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.time">Delete</a>
-                </td>
-            </tr>
-        }
     </tbody>
 </table>
+
+
