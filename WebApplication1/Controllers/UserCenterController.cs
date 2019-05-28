@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication1.Controllers
 {
-    public class PersonalCenterController : Controller
+    public class UserCenterController : Controller
     {
         public IActionResult Index()
         {
@@ -16,6 +16,16 @@ namespace WebApplication1.Controllers
         public IActionResult PersonalCenter()
         {
             ViewData["Message"] = "PersonalCenter";
+            return View();
+        }
+
+        public IActionResult UserInform()
+        {
+            return View();
+        }
+
+        public IActionResult ChecckInform()
+        {
             return View();
         }
     }

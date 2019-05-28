@@ -9,6 +9,7 @@
             <h3>
                 本周统计
             </h3>
+            <hr style="margin: 0 0 30px 0;border: 1px solid #999;" />
             <div class="row-fluid box">
                 <div class="span3" v-for="item in statics">
                     <span>{{ item.num }}</span>
@@ -16,8 +17,9 @@
                 </div>
             </div>
             <h3>
-                热卖书籍
+                <span>热卖书籍</span><i style=""></i>
             </h3>
+            <hr style="margin: 0 0 30px 0;border: 1px solid #999;" />
             <div class="row-fluid box">
                 <div class="span3" v-for="item in hot_books">
                     <div v-bind:class="item.class" class="img-box"><img v-bind:src="item.src" /></div>
@@ -28,7 +30,6 @@
     </div>
 </div>
 
-<script src="~/lib/Vue.js/vue.js"></script>
 <script>
     var app = new Vue({
         el: "#app",

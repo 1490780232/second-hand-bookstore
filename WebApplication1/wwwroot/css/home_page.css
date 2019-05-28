@@ -37,3 +37,13 @@
             width: 210px;
             text-align: center;
         }
+
+.row-fluid > .span12 > h3 > i {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(/images/home/hot.png);
+    position: relative;
+    top: -15px;
+    left: -5px;
+}
