@@ -18,6 +18,11 @@ namespace WebApplication1.Controllers
             _context = context;
         }
 
+
+        public async Task<IActionResult> OperateBooks()
+        {
+            return View(await _context.Book.ToListAsync());
+        }
         // GET: Books
         public async Task<IActionResult> Index()
         {
@@ -53,11 +58,13 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book)
+        public async Task<IActionResult> Create([Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book, [Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book2)
         {
             if (ModelState.IsValid)
             {
+                book2.BookId += "1";
                 _context.Add(book);
+                _context.Add(book2);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

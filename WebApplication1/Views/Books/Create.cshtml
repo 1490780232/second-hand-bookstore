@@ -3,47 +3,47 @@
 @{
     ViewData["Title"] = "Create";
 }
+@{ Layout = "../Shared/_layout_1.cshtml"; }
+<h2>发布图书</h2>
 
-<h2>Create</h2>
 
-<h4>Book</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BookId" class="control-label"></label>
+                <label asp-for="BookId" class="control-label">图书ID</label>
                 <input asp-for="BookId" class="form-control" />
                 <span asp-validation-for="BookId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BookName" class="control-label"></label>
+                <label asp-for="BookName" class="control-label">图书名</label>
                 <input asp-for="BookName" class="form-control" />
                 <span asp-validation-for="BookName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BookIbsn" class="control-label"></label>
+                <label asp-for="BookIbsn" class="control-label">图书Ibsn</label>
                 <input asp-for="BookIbsn" class="form-control" />
                 <span asp-validation-for="BookIbsn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Author" class="control-label"></label>
+                <label asp-for="Author" class="control-label">图书作者</label>
                 <input asp-for="Author" class="form-control" />
                 <span asp-validation-for="Author" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OriPrice" class="control-label"></label>
+                <label asp-for="OriPrice" class="control-label">图书原价</label>
                 <input asp-for="OriPrice" class="form-control" />
                 <span asp-validation-for="OriPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Press" class="control-label"></label>
+                <label asp-for="Press" class="control-label">图书出版社</label>
                 <input asp-for="Press" class="form-control" />
                 <span asp-validation-for="Press" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CurrPrice" class="control-label"></label>
+                <label asp-for="CurrPrice" class="control-label">图书现价</label>
                 <input asp-for="CurrPrice" class="form-control" />
                 <span asp-validation-for="CurrPrice" class="text-danger"></span>
             </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using WebApplication1.Models;
 
 namespace WebApplication1.Models
 {
@@ -22,8 +23,10 @@ namespace WebApplication1.Models
         public virtual DbSet<CheckBook> CheckBook { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Admin>(entity =>
             {
                 entity.ToTable("admin");
@@ -231,5 +234,9 @@ namespace WebApplication1.Models
                     .IsUnicode(false);
             });
         }
+
+        public DbSet<WebApplication1.Models.BookStatistics> BookStatistics { get; set; }
+
+        public DbSet<WebApplication1.Models.OrderStatistics> OrderStatistics { get; set; }
     }
 }

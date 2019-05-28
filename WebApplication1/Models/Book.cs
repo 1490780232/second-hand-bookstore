@@ -9,8 +9,10 @@ namespace WebApplication1.Models
         public string BookName { get; set; }
         public string BookIbsn { get; set; }
         public string Author { get; set; }
-        public int? OriPrice { get; set; }
+        public int OriPrice { get; set; }
         public string Press { get; set; }
-        public int? CurrPrice { get; set; }
+        public int CurrPrice { get; set; }
+        public string category { get; set; }
+
     }
 }

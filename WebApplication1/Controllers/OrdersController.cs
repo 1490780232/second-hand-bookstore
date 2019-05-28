@@ -17,7 +17,10 @@ namespace WebApplication1.Controllers
         {
             _context = context;
         }
-
+        public async Task<IActionResult> OperateOrder()
+        {
+            return View(await _context.Order.ToListAsync());
+        }
         // GET: Orders
         public async Task<IActionResult> Index()
         {
