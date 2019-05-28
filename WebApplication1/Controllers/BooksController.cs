@@ -5,13 +5,66 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebApplication1.Models;
+using ModuleTech;
 
 namespace WebApplication1.Controllers
 {
     public class BooksController : Controller
     {
         private readonly bookstoreContext _context;
+
+        public Reader re;
+        public bool connect()
+        {
+            try
+            {
+                re = Reader.Create("192.168.0.102", ModuleTech.Region.NA, 1);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public ActionResult PublicBook(string book)
+        {
+            Book book1=null;
+            int a=_context.Book.Count();
+            string id = Convert.ToString(a);
+
+            try
+            {
+                book1 = JsonConvert.DeserializeObject<Book>(book);
+                book1.BookId = "00" + id;
+            }
+            catch
+            {
+                return new JsonResult(new { state = "failed", message = "json转换失败" });
+            }
+
+            bool flag = connect();
+            if (flag == false)
+            {
+                return new JsonResult(new { state = "failed", message = "固定读写器未连接上" });
+            }
+
+            try
+            {
+                string s = book1.BookId;
+                TagData epccode = new TagData(s);
+                re.WriteTag(null, epccode);
+                _context.Add(book1);
+                return new JsonResult(new { state = "true", message = "发布成功" });
+            }
+            catch
+            {
+                return new JsonResult(new { state = "failed", message = "未成功写入RFID" });
+            }
+            
+        }
 
         public BooksController(bookstoreContext context)
         {
@@ -58,13 +111,13 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book, [Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book2)
+        public async Task<IActionResult> Create([Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book)
         {
             if (ModelState.IsValid)
             {
-                book2.BookId += "1";
+
                 _context.Add(book);
-                _context.Add(book2);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
