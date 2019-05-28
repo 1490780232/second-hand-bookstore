@@ -24,7 +24,15 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public IActionResult ChecckInform()
+        public IActionResult CheckInform()
+        {
+            return View();
+        }
+        public IActionResult Favorite()
+        {
+            return View();
+        }
+        public IActionResult MyOrder()
         {
             return View();
         }

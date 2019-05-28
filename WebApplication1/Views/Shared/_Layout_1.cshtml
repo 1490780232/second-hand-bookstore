@@ -48,7 +48,8 @@
                         <li><a asp-area="" asp-controller="Reg" asp-action="Index">注册</a></li>
                     </ul>
                     <ul class="nav navbar-nav pull-right" id="personal-center" style="display: none;">
-                        <li><a asp-area="" asp-controller="PersonalCenter" asp-action="PersonalCenter">个人中心</a></li>
+                        <li id="hello_user"><a href="javascript:void(0);"></a></li>
+                        <li><a asp-area="" asp-controller="UserCenter" asp-action="Index">个人中心</a></li>
                         <li><a href="javascript:logout()">退出</a></li>
                     </ul>
                 </div>
@@ -83,11 +84,11 @@
         </div>
         <!-- END MAIN -->
         <div class="clearfix"></div>
-        <footer style="position:static">
+        @*<footer>
             <div class="container-fluid">
                 <p class="copyright">Copyright &copy; 2019.</p>
             </div>
-        </footer>
+        </footer>*@
     </div>
     <!-- END WRAPPER -->
     <!-- Javascript -->
@@ -98,11 +99,10 @@
         if (type == '') {
             $("#login-box").show();
         } else if (type == "users") {
-            $("#personal-center").show();
+            $("#personal-center").show();            
+            $("#hello_user > a").text("你好，" + getCookie("username"));
         };
         var logout = function () {
-            //var path_ = "path=/", domain_ = "domain=.baidu.com";
-            //document.cookie = cname + "=" + cvalue + "; " + domain_ + "; " + expires + "; " + path_;
             document.cookie = "username=;domain=localhost; expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
             document.cookie = "userType=;domain=localhost; expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
             window.location.href = "/"
