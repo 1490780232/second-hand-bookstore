@@ -22,7 +22,7 @@
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
     
-    @*<link rel="stylesheet" href="~/css/site.css" />*@
+    <link rel="stylesheet" href="~/css/site.css" />
     <script src="~/js/cookie-controler.js"></script>
 </head>
 
@@ -42,7 +42,7 @@
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="height: 72px;padding: 18px 30px;font-size: 30px;line-height: 36px;">二手书屋</a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav pull-right" id="login-box" style="display:;">
+                    <ul class="nav navbar-nav pull-right" id="login-box" style="display:none;">
                         <li><a asp-area="" asp-controller="Login" asp-action="Index">登陆</a></li>
                         <li><a asp-area="" asp-controller="Reg" asp-action="Index">注册</a></li>
                     </ul>
@@ -91,7 +91,22 @@
     <!-- END WRAPPER -->
     <!-- Javascript -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>           
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        var type = getCookie("userType");
+        if (type == '') {
+            $("#login-box").show();
+        } else if (type == "users") {
+            $("#personal-center").show();
+        };
+        var logout = function () {
+            //var path_ = "path=/", domain_ = "domain=.baidu.com";
+            //document.cookie = cname + "=" + cvalue + "; " + domain_ + "; " + expires + "; " + path_;
+            document.cookie = "username=;domain=localhost; expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            document.cookie = "userType=;domain=localhost; expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            window.location.href = "/Home/Index"
+        }
+    </script>
 </body>
 
 </html>

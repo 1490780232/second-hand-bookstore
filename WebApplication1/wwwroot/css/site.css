@@ -35,10 +35,6 @@ for details on configuring this project to bundle and minify static web assets. 
         display: none;
     }
 }
-.navbar-brand {
-    float: left;
-    height: 72px;
-    padding: 18px 30px;
-    font-size: 30px;
-    line-height: 36px;
+.navbar-nav > li > a {
+    padding: 28px 20px !important;
 }

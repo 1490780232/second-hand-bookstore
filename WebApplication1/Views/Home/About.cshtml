@@ -1,54 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "主页";
+    ViewData["Title"] = "关于";
 }
-<link rel="stylesheet" href="~/css/home_page.css" />
-
-<div class="container-fluid">
-    <div class="row-fluid" id="app">
-        <div class="span12">
-            <h3>
-                本周统计
-            </h3>
-            <div class="row-fluid box">
-                <div class="span3" v-for="item in statics">
-                    <span>{{ item.num }}</span>
-                    <span>{{ item.name }}</span>
-                </div>
-            </div>
-            <h3>
-                热卖书籍
-            </h3>
-            <div class="row-fluid box">
-                <div class="span3" v-for="item in hot_books">
-                    <div v-bind:class="item.class" class="img-box"><img v-bind:src="item.src" /></div>
-                    <span>{{ item.name }}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="~/lib/Vue.js/vue.js"></script>
-<script>
-    var app = new Vue({
-        el: "#app",
-        data: {
-            statics: [
-                { name: "本周浏览量", num: 1024 },
-                { name: "本周购买量", num: 500 },
-                { name: "本周上新量", num: 110 },
-                { name: "本周注册量", num: 60 },
-            ],
-            hot_books: [
-                { name: "c++程序设计", src: "/images/home/cplusplus.jpg",class: "img-box-1"},
-                { name: "微积分（上）", src: "/images/home/微积分.jpg", class: "img-box-1"},
-                { name: "概率论与数理统计", src: "/images/home/概率论与数理统计.jpg", class: "img-box-2" },
-                { name: "大学英语（三）", src: "/images/home/大学英语3.jpg", class: "img-box-2" },
-                { name: "市场营销学", src: "/images/home/市场营销学.jpg", class: "img-box-1" },
-                { name: "管理信息系统", src: "/images/home/管理信息系统.jpg", class: "img-box-2" },
-                { name: "物流管理", src: "/images/home/物流管理.jpg", class: "img-box-2" },
-                { name: "物流管理", src: "/images/home/物流管理.jpg", class: "img-box-2" },
-            ]
-        }
-    });
-</script>
+<h3>二手书屋</h3>
+<p>交易你的闲置二手书</p>
