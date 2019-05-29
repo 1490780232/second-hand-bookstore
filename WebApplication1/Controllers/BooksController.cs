@@ -68,7 +68,7 @@ namespace WebApplication1.Controllers
                 re.Disconnect();
                 string getBook = JsonConvert.SerializeObject(book1);
 
-                return new JsonResult(new { state = "success", message = getBook});
+                return new JsonResult(new { state = "success", message = getBook, new_book = getBook});
 
             }
             catch
