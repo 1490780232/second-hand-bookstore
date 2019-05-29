@@ -79,7 +79,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        public async Task<IActionResult> BuyBooks()
+        public ActionResult  BuyBooks()
         {
             string id = null;
             bool flag = connect();
@@ -104,14 +104,14 @@ namespace WebApplication1.Controllers
             {
                 return new JsonResult(new { state = "failed", message = "未读出数据" });
             }
-            var book = await _context.Book
+            var book =  _context.Book
                 .FirstOrDefaultAsync(m => m.BookId == id);
             if (book == null)
             {
-                return NotFound();
+                return  new JsonResult(new { state = "failed", message = "RFID信息错误" });;
             }
-
-            return View(book);
+            string book1 = JsonConvert.SerializeObject(book);
+            return new JsonResult(new { state = "success", message = book1 });
         }
 
 

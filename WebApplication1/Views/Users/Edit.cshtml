@@ -3,10 +3,10 @@
 @{
     ViewData["Title"] = "Edit";
 }
+@{ Layout = "../Shared/_layout_2.cshtml"; }
+<h2>用户信息修改</h2>
 
-<h2>Edit</h2>
-
-<h4>Users</h4>
+@*<h4>Users</h4>*@
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,38 +14,38 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="UserId" />
             <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
+                <label asp-for="UserName" class="control-label">用户名</label>
                 <input asp-for="UserName" class="form-control" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AlipayAccount" class="control-label"></label>
+                <label asp-for="AlipayAccount" class="control-label">支付宝账号</label>
                 <input asp-for="AlipayAccount" class="form-control" />
                 <span asp-validation-for="AlipayAccount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ContactInfo" class="control-label"></label>
+                <label asp-for="ContactInfo" class="control-label">联系信息</label>
                 <input asp-for="ContactInfo" class="form-control" />
                 <span asp-validation-for="ContactInfo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Mail" class="control-label"></label>
+                <label asp-for="Mail" class="control-label">邮箱</label>
                 <input asp-for="Mail" class="form-control" />
                 <span asp-validation-for="Mail" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
+                <label asp-for="Password" class="control-label">密码</label>
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="保存" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">返回列表</a>
 </div>
 
