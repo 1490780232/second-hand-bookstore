@@ -35,16 +35,17 @@ namespace WebApplication1.Controllers
                 return new JsonResult(new { x =1, y =2 });
 
         }
+
         public ActionResult PublicBook(string book)
         {
-            Book book1=null;
-            int a=_context.Book.Count();
+            Book book1 = null;
+            int a = _context.Book.Count();
             string id = Convert.ToString(a);
 
             //try
             //{
-                book1 = JsonConvert.DeserializeObject<Book>(book);
-                book1.BookId = "00" + id;
+            book1 = JsonConvert.DeserializeObject<Book>(book);
+            book1.BookId = "00" + id;
             //}
             //catch
             //{
@@ -63,14 +64,52 @@ namespace WebApplication1.Controllers
                 TagData epccode = new TagData(s);
                 re.WriteTag(null, epccode);
                 _context.Add(book1);
+                re.Disconnect();
                 return new JsonResult(new { state = "true", message = "发布成功" });
             }
             catch
             {
                 return new JsonResult(new { state = "failed", message = "未成功写入RFID" });
             }
-            
+
         }
+
+
+        public async Task<IActionResult> BuyBooks()
+        {
+            string id = null;
+            bool flag = connect();
+            if (flag == false)
+            {
+                return new JsonResult(new { state = "failed", message = "固定读写器未连接上" });
+            }
+
+            List<string> tags = new List<string>();
+            try
+            {
+                string str;
+                TagReadData[] tagda = re.Read(200);
+                if (tagda.Length > 0)
+                {
+                    str = tagda[0].Tag.ToString();
+                    id = str.Substring(4);//.EPCString;
+                }
+
+            }
+            catch
+            {
+                return new JsonResult(new { state = "failed", message = "未读出数据" });
+            }
+            var book = await _context.Book
+                .FirstOrDefaultAsync(m => m.BookId == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book);
+        }
+
 
         public BooksController(bookstoreContext context)
         {
