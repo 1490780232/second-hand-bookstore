@@ -4,52 +4,72 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<h2>新建订单</h2>
 
-<h4>Order</h4>
+@*<h4>Order</h4>*@
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="OrderId" class="control-label"></label>
+                <label asp-for="OrderId" class="control-label">订单编号</label>
                 <input asp-for="OrderId" class="form-control" />
                 <span asp-validation-for="OrderId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BookId" class="control-label"></label>
+                <label asp-for="BookId" class="control-label">图书编号</label>
                 <input asp-for="BookId" class="form-control" />
                 <span asp-validation-for="BookId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
+                <label asp-for="UserId" class="control-label">用户编号</label>
                 <input asp-for="UserId" class="form-control" />
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OrderTime" class="control-label"></label>
+                <label asp-for="OrderTime" class="control-label">订单完成时间</label>
                 <input asp-for="OrderTime" class="form-control" />
                 <span asp-validation-for="OrderTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OrderPrice" class="control-label"></label>
+                <label asp-for="OrderPrice" class="control-label">订单金额</label>
                 <input asp-for="OrderPrice" class="form-control" />
                 <span asp-validation-for="OrderPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OrderStatus" class="control-label"></label>
+                <label asp-for="OrderStatus" class="control-label">订单状态</label>
                 <input asp-for="OrderStatus" class="form-control" />
                 <span asp-validation-for="OrderStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <label asp-for="bookName" class="control-label">图书名称</label>
+                <input asp-for="bookName" class="form-control" />
+                <span asp-validation-for="bookName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="buyerName" class="control-label">买家姓名</label>
+                <input asp-for="buyerName" class="form-control" />
+                <span asp-validation-for="bookName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="salerName" class="control-label">卖家姓名</label>
+                <input asp-for="salerName" class="form-control" />
+                <span asp-validation-for="salerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="salerID" class="control-label">卖家编号</label>
+                <input asp-for="salerID" class="form-control" />
+                <span asp-validation-for="salerID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="创建" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">返回列表</a>
 </div>
 
