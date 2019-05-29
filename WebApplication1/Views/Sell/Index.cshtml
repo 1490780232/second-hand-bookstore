@@ -2,38 +2,44 @@
 @{
     ViewData["Title"] = "卖书";
 }
-
-<h2>卖书流程</h2>
+<style>
+    .form-group label.form-label {
+        display: inline-block;
+        min-width: 80px;
+    }
+</style>
+<h2>卖书流程  <small>卖书前请先登录</small></h2>
 
 <div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
-            <form class="form-horizontal" id="sell-form">
-                <div class="control-group">
-                    <label class="control-label" for="inputEmail">书籍ISBN</label>
-                    <input id="BookISBN" type="text" v-model="book.BookISBN"/>
+    <div class="row" id="sell-form">
+        <div class="col-md-4 col-sm-4">
+            <div>
+                <h3>填写书籍信息</h3>
+                <div class="form-group">
+                    <label class="form-label" for="BookISBN">书籍ISBN</label>
+                    <input id="BookISBN" type="text" v-model="book.BookISBN" />
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="inputEmail">书籍名称</label>
-                    <input id="BookName" type="text" v-model="book.BookName"/>
+                <div class="form-group">
+                    <label class="form-label" for="BookName">书籍名称</label>
+                    <input id="BookName" type="text" v-model="book.BookName" />
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="inputEmail">作者</label>
-                    <input id="author" type="text" v-model="book.author"/>
-                </div><div class="control-group">
-                    <label class="control-label" for="inputEmail">出版社</label>
-                    <input id="press" type="text" v-model="book.press"/>
+                <div class="form-group">
+                    <label class="form-label" for="author">作者</label>
+                    <input id="author" type="text" v-model="book.author" />
+                </div><div class="form-group">
+                    <label class="form-label" for="press">出版社</label>
+                    <input id="press" type="text" v-model="book.press" />
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="inputEmail">书籍原价</label>
-                    <input id="oriPrice" type="text" v-model="book.oriPrice"/>
+                <div class="form-group">
+                    <label class="form-label" for="oriPrice">书籍原价</label>
+                    <input id="oriPrice" type="text" v-model="book.oriPrice" />
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="inputEmail">出手价格</label>
-                    <input id="currPrice" type="text" v-model="book.currPrice"/>
+                <div class="form-group">
+                    <label class="form-label" for="currPrice">出手价格</label>
+                    <input id="currPrice" type="text" v-model="book.currPrice" />
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="inputEmail">类别</label>
+                <div class="form-group">
+                    <label class="form-label" for="category">类别</label>
                     <select id="category" v-model="book.category">
                         <option>计算机类</option>
                         <option>数理科学</option>
@@ -42,12 +48,61 @@
                         <option>其他</option>
                     </select>
                 </div>
-                <div class="control-group" style="display:none;">
-                    <label class="control-label" for="inputEmail">卖家姓名</label>
-                    <input id="username" type="text" v-model="book.username"/>
+                <div class="form-group" style="display:none;">
+                    <label class="form-label" for="username">卖家姓名</label>
+                    <input id="username" type="text" v-model="book.username" />
                 </div>
-                <a class="btn" contenteditable="true" type="submit" onclick="commit()">提交</a>
-            </form>
+                <a class="btn" href="javascript:commit();">提交</a>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div >
+                <h3>书籍录入信息</h3>
+                <div class="form-group">
+                    <label class="form-label">书籍编号:</label>
+                    <label>{{ new_book.BookID }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">书籍名称：</label>
+                    <label>{{ new_book.BookName }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">书籍ISBN：</label>
+                    <label>{{ new_book.BookISBN }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">作者：</label>
+                    <label>{{ new_book.author }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">出版社：</label>
+                    <label>{{ new_book.press }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">书籍原价：</label>
+                    <label>￥{{ new_book.oriPrice }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">出手价格：</label>
+                    <label>￥{{ new_book.currPrice }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">类别：</label>
+                    <label>{{ new_book.category }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">卖家：</label>
+                    <label>{{ new_book.userName }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">书籍位置：</label>
+                    <label>{{ new_book.location }}</label>
+                </div>
+            </div>
+
+        </div>
+        <div style="position:relative;top:200px">
+            <a class="btn" href="javascript:alert('请尽快将书籍上架');" v-if="new_book.BookName">确认录入</a>
         </div>
     </div>
 </div>
@@ -67,25 +122,41 @@
                 category: "",
                 userName: getCookie("username"),
             },
+            new_book: {
+                BookID: "",
+                BookName: "",
+                BookISBN: "",
+                author: "",
+                press: "",
+                oriPrice: "",
+                currPrice: "",
+                category: "",
+                userName: getCookie("username"),
+                location: "",
+            }
         }
     })
     function commit() {
-        $.ajax({
-        url: "/Books/PublicBook",
-        data: {
-            book: JSON.stringify(sellapp.book)
-        },
-        type: "post",
-        dataType: "json",
-        success: function (data) {
-            if (data.state == "success") {
-                alert(成功)
-            }
-            else {                
-                alert(data.message);
-            }
+        if (sellapp.book.userName == "") {
+            alert("请先登录后再提交")
+            return;
         }
-    });
+        $.ajax({
+            url: "/Books/PublicBook",
+            data: {
+                book: JSON.stringify(sellapp.book)
+            },
+            type: "post",
+            dataType: "string",
+            success: function (data) {
+                if (data.state == "success") {
+                    sellapp.new_book = data.book;
+                }
+                else {
+                    alert(data.message);
+                }
+            }
+        });
     }
-    
+
 </script>
