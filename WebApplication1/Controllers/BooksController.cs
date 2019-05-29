@@ -33,10 +33,13 @@ namespace WebApplication1.Controllers
             }
         }
 
-        public ActionResult positon()
+        public ActionResult Position()
         {
-                
-                return new JsonResult(new { x =1, y =2 });
+
+            Random random = new Random();
+            int num = random.Next(30, 300);
+            int num2 = random.Next(30, 300);
+            return new JsonResult(new { x = num, y = num2 });
 
         }
 
@@ -78,7 +81,6 @@ namespace WebApplication1.Controllers
 
         }
 
-
         public ActionResult  BuyBooks()
         {
             string id = null;
@@ -104,11 +106,13 @@ namespace WebApplication1.Controllers
             {
                 return new JsonResult(new { state = "failed", message = "未读出数据" });
             }
-            var book =  _context.Book
-                .FirstOrDefaultAsync(m => m.BookId == id);
+           
+            var book = from p in _context.Book
+                            where p.BookId.Contains(id)
+                            select p ;
             if (book == null)
             {
-                return  new JsonResult(new { state = "failed", message = "RFID信息错误" });;
+                return  new JsonResult(new { state = "failed", message = "RFID信息错误" });
             }
             string book1 = JsonConvert.SerializeObject(book);
             return new JsonResult(new { state = "success", message = book1 });
