@@ -40,7 +40,8 @@
 
   <ItemGroup>
     <Reference Include="ModuleAPI">
-      <HintPath>bin\Debug\netcoreapp2.1\ModuleAPI.dll</HintPath>
+      <HintPath>..\..\..\..\ModuleAPI.dll</HintPath>
+      <Private>true</Private>
     </Reference>
   </ItemGroup>
 

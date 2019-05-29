@@ -78,6 +78,21 @@ namespace WebApplication1.Controllers
                                 OriPrice = p.OriPrice,
                                 CurrPrice = p.CurrPrice
                             };
+            if(bookname == "all")
+            {
+                orderList = from p in _context.Book
+
+                            select new
+                            {
+                                BookId = p.BookId,
+                                BookName = p.BookName,
+                                BookIbsn = p.BookIbsn,
+                                Author = p.Author,
+                                Press = p.Press,
+                                OriPrice = p.OriPrice,
+                                CurrPrice = p.CurrPrice
+                            };
+            }
             // var orderList = _context.Order.ToList();
             string getList = JsonConvert.SerializeObject(orderList);  //序列化
             ViewData["data"] = getList;                                                  // return new JsonResult(new { Data = getList });

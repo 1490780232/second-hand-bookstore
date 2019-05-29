@@ -29,6 +29,12 @@ namespace WebApplication1.Controllers
             }
         }
 
+        public ActionResult positon()
+        {
+                
+                return new JsonResult(new { x =1, y =2 });
+
+        }
         public ActionResult PublicBook(string book)
         {
             Book book1=null;

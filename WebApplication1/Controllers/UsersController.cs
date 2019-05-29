@@ -35,6 +35,10 @@ namespace WebApplication1.Controllers
             return View(await _context.Users.ToListAsync());
         }
 
+        public async Task<IActionResult> UserPosition()
+        {
+            return View();
+        }
         // GET: Users
         public async Task<IActionResult> Index()
         {

@@ -1,65 +1,28 @@
 ﻿
 @{
-    ViewData["Title"] = "Result";
+    ViewData["Title"] = "书籍查询结果";
 }
 
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>书籍查询结果</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        html, body {
-            background: #fff;
-            font: normal 15px "Microsoft YaHei";
-        }
-
-        div.main > p {
-            background: #044599;
+        #search {
             text-align: center;
-            font-weight: bold;
-            font-size: 20px;
-            border: 1px #ECECEC solid;
-            color: #fff;
-            height: 50px;
-            line-height: 50px;
-            margin: 0;
+            float:left;
         }
-
-        div.main > form {
-            border: 1px #ECECEC solid;
-            padding: 10px;
-            height: 50px;
+        #hhh{
+            padding-top:30px;
         }
-
-        #BookQuery_btn {
-            width: 50px;
+        #hhh2 {
+            padding-top: 10px;
+            padding-left: 8px;
         }
-
-        div.main > table tr th,
-        div.main > table tr td {
-            border: 1px solid #ECECEC;
-            text-align: center;
-            height: 30px;
-            line-height: 30px;
-        }
-
-        div.main > table tr th {
-            background: #044599;
-            color: #fff;
-        }
+        
     </style>
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script type="text/javascript">
         $(function () {
+
             function check() {
                 var $bookname = $("#bookname");
                 $('tbody').html("");
@@ -102,34 +65,74 @@
 
         });
     </script>
-</head>
-<body>
+    <script>
+        $(function () {
+            var $bookname = "all";
+            $('tbody').html("");
+            $.ajax({
+                url: "/BookQuery/GetData",
+                data: {
+                    bookname: $.trim($bookname.val())
+                },
+                type: "post",
+                cache: false,
+                //dataType: "json",
+                success: function (data) {
+                    try {
+                        var tmpData = $.parseJSON(data/*.Data*/);
+                        for (var i = 0; i < tmpData.length; i++) {
+                            //var newRow = '<tr><td>' + tmpData[i].BookId + '</td><td>'
+                            var newRow = '<tr><td> ' + tmpData[i].BookId + '</td><td>'
+                                + tmpData[i].BookName + '</td><td>'
+                                + tmpData[i].BookIbsn + '</td><td>'
+                                + tmpData[i].Author + '</td><td>'
+                                + tmpData[i].Press + '</td><td>'
+                                + tmpData[i].OriPrice + '</td><td>'
+                                + tmpData[i].CurrPrice + '</td><td></tr>';
+                            $('tbody').append(newRow);
 
-    <div class="main">
-        <p>在架书籍查询</p>
-        <form id="BookQuery_Form" action="" method="post">
+                        }
+
+                    }
+                    catch (err) {
+                        alert("数据获取失败:" + err.message);
+                    }
+                },
+                error: function (response) {
+                    alert("数据获取失败，原因：超时或错误号:" + response.status + ",请稍后再试。");
+                }
+
+        });
+    </script>
+        <h3 class="page-title" id="hhh">在架书籍查询</h3>
+
+        <span id="search">
             书籍关键字或书名：
             <input type="text" id="bookname">
             <input type="button" id="BookQuery_btn" value="提交" />
-        </form>
-        <table width="100%" cellpadding="0" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>书籍编号</th>
-                    <th>书籍名称</th>
-                    <th>ISBN</th>
-                    <th>作者名</th>
-                    <th>出版社</th>
-                    <th>原价</th>
-                    <th>现价</th>
-                </tr>
+        </span>
+     
+        <div class="row" >
+            <div class="col-md-12" id="hhh2">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>书籍编号</th>
+                            <th>书籍名称</th>
+                            <th>ISBN</th>
+                            <th>作者名</th>
+                            <th>出版社</th>
+                            <th>原价</th>
+                            <th>现价</th>>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                    </tbody>
+                </table>
+                <!-- END BASIC TABLE -->
+            </div>
+        </div>
 
-            </thead>
-            <tbody></tbody>
-
-        </table>
-    </div>
     <a asp-area="" asp-controller="BookQuery" asp-action="ResultDetail" asp-route-id="0003">详细信息未完成</a>
-</body>
-</html>
 
