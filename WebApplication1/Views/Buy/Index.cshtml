@@ -63,7 +63,7 @@
             <div id="qrcode">
             </div>
             <div class="form-group">
-                <a class="btn" href="javascript:void(0);">提交订单</a>
+                <a class="btn" href="javascript:commit();">提交订单</a>
             </div>
         </div>
     </div>
@@ -84,9 +84,22 @@
                 userName: "",
             },
             location: "",
+            order: {
+                OrderId: "",
+                BookId: book.BookId,                
+                OrderTime: new Date().toJSON(),
+                OrderPrice: parseInt(book.CurrPrice),
+                OrderStatus: 1,
+                UserId: "",
+                bookName: book.BookName,
+                buyerName: getCookie("username"),
+                salerName: book.userName,
+                salerID: ""
+            },
         },
     });
     function read() {
+
         $.get("/Books/BuyBooks", function (data, status) {
             console.log("Data: " + data.message + "\nStatus: " + status);
             buyapp.book = JSON.parse(data.message);
@@ -99,6 +112,18 @@
         }
         var qrcode = new QRCode(document.getElementById("qrcode"), { width: 180, height: 180 });
         qrcode.makeCode(buyapp.book.CurrPrice + "元");
+    }
+    function commit() {
+
+        $.post(
+            "/",
+            {
+                order: buyapp.order
+            },
+            function (data, status) {
+
+            }
+        )
     }
 </script>
 

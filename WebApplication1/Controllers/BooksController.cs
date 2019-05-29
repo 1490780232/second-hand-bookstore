@@ -108,12 +108,17 @@ namespace WebApplication1.Controllers
             }
            
             var book = from p in _context.Book where p.BookId.Contains(id) select p ;
-            if (book == null)
+            try
             {
-                return  new JsonResult(new { state = "failed", message = "RFID信息错误" });
+                string book1 = JsonConvert.SerializeObject(book.First<Book>());
+                return new JsonResult(new { state = "success", message = book1 });
             }
-            string book1 = JsonConvert.SerializeObject(book.First<Book>());
-            return new JsonResult(new { state = "success", message = book1 });
+            catch
+            {
+                return new JsonResult(new { state = "failed", message = "RFID信息错误" });
+            }
+            
+            
         }
 
 
