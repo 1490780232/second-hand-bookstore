@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "UserPosition";
+}
+@{ Layout = "../Shared/_layout_2.cshtml"; }	
+
+<script>
+    function test() {
+        $.ajax({
+            type: "POST",
+            url: "/Books/positon",
+            timeout: 60000,
+            async: true,
+            dataType: "json",
+            success: function (data) {
+                $("#loaction").html(data);
+            }
+
+        });
+    }
+    window.onload = function () {
+        test();
+        //setInterval("test(),10000");
+
+    };
+    //$(function () {
+
+    //    function check() {
+    //        var $bookname = $("#bookname");
+    //        $('tbody').html("");
+    //        $.ajax({
+    //            url: "/BookQuery/GetData",
+    //            data: {
+    //                bookname: $.trim($bookname.val())
+    //            },
+    //            type: "post",
+    //            cache: false,
+    //            //dataType: "json",
+    //            success: function (data) {
+    //                try {
+    //                    var tmpData = $.parseJSON(data/*.Data*/);
+    //                    for (var i = 0; i < tmpData.length; i++) {
+    //                        //var newRow = '<tr><td>' + tmpData[i].BookId + '</td><td>'
+    //                        var newRow = '<tr><td> ' + tmpData[i].BookId + '</td><td>'
+    //                            + tmpData[i].BookName + '</td><td>'
+    //                            + tmpData[i].BookIbsn + '</td><td>'
+    //                            + tmpData[i].Author + '</td><td>'
+    //                            + tmpData[i].Press + '</td><td>'
+    //                            + tmpData[i].OriPrice + '</td><td>'
+    //                            + tmpData[i].CurrPrice + '</td><td></tr>';
+    //                        $('tbody').append(newRow);
+
+    //                    }
+
+    //                }
+    //                catch (err) {
+    //                    alert("数据获取失败:" + err.message);
+    //                }
+    //            },
+    //            error: function (response) {
+    //                alert("数据获取失败，原因：超时或错误号:" + response.status + ",请稍后再试。");
+    //            }
+
+    //        });
+    //    }
+    //    $("#BookQuery_btn").click(function () { check(); })
+
+    //});
+</script>
+
+
+
+<style>
+    #map {
+        background: url(/assets/img/background.png) no-repeat 0px 0px;
+        border: 1px solid #F00;
+        width: 642px;
+        height: 457px;
+        position:relative;
+    }
+    #position {
+        width: 50px;
+        height: 100px;
+        position: absolute;
+        left: 100px;
+        top: 100px;
+    }
+</style>
+<h2>UserPosition</h2>
+
+<div id="map" background="~/assets/img/background.png">
+    <img src="~/images/banner1.svg" id="position" />
+
+</div>
+<label id="loaction"></label>
