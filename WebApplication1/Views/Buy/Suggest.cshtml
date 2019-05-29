@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewData["Title"] = "购书推荐";
+}
+<style>
+    #suggest-box {
+        position: relative;
+    }
+
+</style>
+<div id="suggest-box">
+    <h2>购书推荐</h2>
+    <div class="btn-group btn-group-justified" style="margin-bottom: 15px;">
+        <div class="btn-group">
+            <span class="btn btn-info">书目导航</span>
+        </div>
+        <div class="btn-group"  v-for="nav in navs">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ nav.name }} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" style="min-width: 100%; text-align: center;">
+                <li  v-for="item in nav.array"><a href="#">{{ item }}</a></li>
+            </ul>
+        </div>    
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>书籍编号</th>
+                        <th>书籍名称</th>
+                        <th>书籍ISBN</th>
+                        <th>作者</th>
+                        <th>出版社</th>
+                        <th>原价</th>
+                        <th>现价</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="book in books">
+                        <th v-for="value in book">
+                            {{ value }}
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    var suggest_app = new Vue({
+        el: "#suggest-box",
+        data: {
+            navs: [
+                {
+                    name: "法律政治",
+                    array: [ "法律工具", "司法考试", "法学理论", "法律法规", "司法制度" ],
+                },
+                {
+                    name: "计算机",
+                    array: [ "计算机理论", "硬件维修", "操作系统", "数据库", "程序设计" ],
+                },
+                {
+                    name: "历史地理",
+                    array: [ "史学理论", "地方史志", "中国史", "通史", "古代史" ],
+                },
+                {
+                    name: "社会科学",
+                    array: [ "文化人类学", "社会学", "教育理论", "中国教育", "新闻传播" ],
+                },
+                {
+                    name: "数理科学",
+                    array: [ "法律工具", "司法考试", "法学理论", "法律法规", "司法制度" ],
+                },
+                {
+                    name: "文学",
+                    array: [ "小说", "作品集", "文学理论", "中国古诗词", "当代随笔" ],
+                },
+                {
+                    name: "医药卫生",
+                    array: [ "基础医学", "卫生教材", "中医临床", "执业药师", "医院管理" ],
+                },
+                {
+                    name: "语言文学",
+                    array: [ "法律工具", "司法考试", "法学理论", "法律法规", "司法制度" ],
+                },
+            ],
+            books: [],
+        }
+    })
+    function go(category){
+         $.ajax({
+                url: "/BookQuery/GetBooks",
+                data: {
+                    // bookname: $.trim($bookname.val())
+                    category: category,
+                },
+                type: "post",
+                cache: false,
+                dataType: "text",
+                success: function (data) {
+                    try {
+                        var tmpData = $.parseJSON(data);
+                        suggest_app.books = data;
+                    }
+                    catch (err) {
+                        alert("数据获取失败:" + err.message);
+                    }
+                },
+                error: function (response) {
+                    alert("数据获取失败，原因：超时或错误号:" + response.status + ",请稍后再试。");
+                }
+
+            });
+        }
+</script>
+
