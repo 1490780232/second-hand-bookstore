@@ -39,15 +39,9 @@
 
 
   <ItemGroup>
-    <Reference Include="ModuleAPI">
-      <HintPath>..\..\..\..\ModuleAPI.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-  </ItemGroup>
-
-
-
-  <ItemGroup>
+    <Content Update="Views\Buy\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\UserCenter\MyOrder.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -59,7 +53,9 @@
 
 
   <ItemGroup>
-    <Folder Include="Views\Buy\" />
+    <Reference Include="ModuleAPI">
+      <HintPath>bin\Debug\netcoreapp2.1\ModuleAPI.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 

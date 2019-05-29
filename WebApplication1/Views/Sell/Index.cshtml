@@ -17,7 +17,7 @@
                 <h3>填写书籍信息</h3>
                 <div class="form-group">
                     <label class="form-label" for="BookISBN">书籍ISBN</label>
-                    <input id="BookISBN" type="text" v-model="book.BookISBN" />
+                    <input id="BookIbsn" type="text" v-model="book.BookIbsn" />
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="BookName">书籍名称</label>
@@ -25,18 +25,18 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="author">作者</label>
-                    <input id="author" type="text" v-model="book.author" />
+                    <input id="Author" type="text" v-model="book.Author" />
                 </div><div class="form-group">
                     <label class="form-label" for="press">出版社</label>
-                    <input id="press" type="text" v-model="book.press" />
+                    <input id="Press" type="text" v-model="book.Press" />
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="oriPrice">书籍原价</label>
-                    <input id="oriPrice" type="text" v-model="book.oriPrice" />
+                    <input id="OriPrice" type="text" v-model="book.OriPrice" />
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="currPrice">出手价格</label>
-                    <input id="currPrice" type="text" v-model="book.currPrice" />
+                    <input id="CurrPrice" type="text" v-model="book.CurrPrice" />
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="category">类别</label>
@@ -50,9 +50,9 @@
                 </div>
                 <div class="form-group" style="display:none;">
                     <label class="form-label" for="username">卖家姓名</label>
-                    <input id="username" type="text" v-model="book.username" />
+                    <input id="userName" type="text" v-model="book.userName" />
                 </div>
-                <a class="btn" href="javascript:commit();">提交</a>
+                <a class="btn" id="commit-btn" href="javascript:commit();">提交</a>
             </div>
         </div>
         <div class="col-md-4 col-sm-4">
@@ -60,7 +60,7 @@
                 <h3>书籍录入信息</h3>
                 <div class="form-group">
                     <label class="form-label">书籍编号:</label>
-                    <label>{{ new_book.BookID }}</label>
+                    <label>{{ new_book.BookId }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">书籍名称：</label>
@@ -68,23 +68,23 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">书籍ISBN：</label>
-                    <label>{{ new_book.BookISBN }}</label>
+                    <label>{{ new_book.BookIbsn }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">作者：</label>
-                    <label>{{ new_book.author }}</label>
+                    <label>{{ new_book.Author }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">出版社：</label>
-                    <label>{{ new_book.press }}</label>
+                    <label>{{ new_book.Press }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">书籍原价：</label>
-                    <label>￥{{ new_book.oriPrice }}</label>
+                    <label>￥{{ new_book.OriPrice }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">出手价格：</label>
-                    <label>￥{{ new_book.currPrice }}</label>
+                    <label>￥{{ new_book.CurrPrice }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">类别：</label>
@@ -96,7 +96,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">书籍位置：</label>
-                    <label>{{ new_book.location }}</label>
+                    <label>{{ location }}</label>
                 </div>
             </div>
 
@@ -112,28 +112,28 @@
         el: "#sell-form",
         data: {
             book: {
-                BookID: "123",
+                BookId: "123",
                 BookName: "",
-                BookISBN: "",
-                author: "",
-                press: "",
-                oriPrice: "",
-                currPrice: "",
+                BookIbsn: "",
+                Author: "",
+                Press: "",
+                OriPrice: "",
+                CurrPrice: "",
                 category: "",
                 userName: getCookie("username"),
             },
             new_book: {
-                BookID: "",
+                BookId: "",
                 BookName: "",
-                BookISBN: "",
-                author: "",
-                press: "",
-                oriPrice: "",
-                currPrice: "",
+                BookIbsn: "",
+                Author: "",
+                Press: "",
+                OriPrice: "",
+                CurrPrice: "",
                 category: "",
-                userName: getCookie("username"),
-                location: "",
-            }
+                userName: "",                
+            },
+            location: "",
         }
     })
     function commit() {
@@ -141,21 +141,24 @@
             alert("请先登录后再提交")
             return;
         }
+        $("#commit-btn").attr('disabled', 'disabled'); //禁用提交按钮
+
         $.ajax({
             url: "/Books/PublicBook",
             data: {
                 book: JSON.stringify(sellapp.book)
             },
             type: "post",
-            dataType: "string",
+            dataType: "json",
             success: function (data) {
                 if (data.state == "success") {
-                    sellapp.new_book = data.book;
+                    sellapp.new_book = JSON.parse(data.message); 
                 }
                 else {
                     alert(data.message);
                 }
-            }
+                $("#commit-btn").removeAttr('disabled'); //取消禁用提交按钮
+            },
         });
     }
 

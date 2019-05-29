@@ -20,7 +20,11 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                re = Reader.Create("192.168.0.102", ModuleTech.Region.NA, 1);
+                re = Reader.Create("192.168.0.103", ModuleTech.Region.NA, 4);
+                int[] ants = new int[] { 1 };
+                SimpleReadPlan plan = new SimpleReadPlan(TagProtocol.GEN2, ants);
+                re.ParamSet("ReadPlan", plan);
+                
                 return true;
             }
             catch
@@ -38,8 +42,9 @@ namespace WebApplication1.Controllers
 
         public ActionResult PublicBook(string book)
         {
-            Book book1 = null;
-            int a = _context.Book.Count();
+            Book book1=null;
+            int a=_context.Book.Count()+1;
+
             string id = Convert.ToString(a);
 
 
@@ -59,8 +64,12 @@ namespace WebApplication1.Controllers
                 TagData epccode = new TagData(s);
                 re.WriteTag(null, epccode);
                 _context.Add(book1);
+                 _context.SaveChanges();
                 re.Disconnect();
-                return new JsonResult(new { state = "true", message = "发布成功" });
+                string getBook = JsonConvert.SerializeObject(book1);
+
+                return new JsonResult(new { state = "success", message = getBook});
+
             }
             catch
             {

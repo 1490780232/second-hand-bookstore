@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewData["Title"] = "买书";
+}
+<style>
+    .form-group label.form-label {
+        display: inline-block;
+        min-width: 80px;
+    }
+</style>
+<h2>买书  <small>购买前请先登录</small></h2>
+
+
+
+
+
+@*<div class="container-fluid">
+        <div class="row" id="sell-form">
+            <div class="col-md-4 col-sm-4">
+                <div>
+                    <h3>填写书籍信息</h3>
+                    <div class="form-group">
+                        <label class="form-label" for="BookISBN">书籍ISBN</label>
+                        <input id="BookISBN" type="text" v-model="book.BookISBN" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="BookName">书籍名称</label>
+                        <input id="BookName" type="text" v-model="book.BookName" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="author">作者</label>
+                        <input id="author" type="text" v-model="book.author" />
+                    </div><div class="form-group">
+                        <label class="form-label" for="press">出版社</label>
+                        <input id="press" type="text" v-model="book.press" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="oriPrice">书籍原价</label>
+                        <input id="oriPrice" type="text" v-model="book.oriPrice" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="currPrice">出手价格</label>
+                        <input id="currPrice" type="text" v-model="book.currPrice" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="category">类别</label>
+                        <select id="category" v-model="book.category">
+                            <option>计算机类</option>
+                            <option>数理科学</option>
+                            <option>文学</option>
+                            <option>社会科学</option>
+                            <option>其他</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="display:none;">
+                        <label class="form-label" for="username">卖家姓名</label>
+                        <input id="username" type="text" v-model="book.username" />
+                    </div>
+                    <a class="btn" href="javascript:commit();">提交</a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div >
+                    <h3>书籍录入信息</h3>
+                    <div class="form-group">
+                        <label class="form-label">书籍编号:</label>
+                        <label>{{ new_book.BookID }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">书籍名称：</label>
+                        <label>{{ new_book.BookName }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">书籍ISBN：</label>
+                        <label>{{ new_book.BookISBN }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">作者：</label>
+                        <label>{{ new_book.author }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">出版社：</label>
+                        <label>{{ new_book.press }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">书籍原价：</label>
+                        <label>￥{{ new_book.oriPrice }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">出手价格：</label>
+                        <label>￥{{ new_book.currPrice }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">类别：</label>
+                        <label>{{ new_book.category }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">卖家：</label>
+                        <label>{{ new_book.userName }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">书籍位置：</label>
+                        <label>{{ location }}</label>
+                    </div>
+                </div>
+
+            </div>
+            <div style="position:relative;top:200px">
+                <a class="btn" href="javascript:alert('请尽快将书籍上架');" v-if="new_book.BookName">确认录入</a>
+            </div>
+        </div>
+    </div>*@
+
