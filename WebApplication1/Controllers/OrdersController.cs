@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -21,6 +22,21 @@ namespace WebApplication1.Controllers
         {
             return View(await _context.Order.ToListAsync());
         }
+
+        public ActionResult Commit(string order)
+        {
+            Order my_order = JsonConvert.DeserializeObject<Order>(order);            
+            my_order.OrderId = "000"+(_context.Order.Count() + 1);
+            //var tmp = (my_order.OrderTime * 10000) + 621355968000000000;
+            var tmp = (1559189774131 * 10000) + 621355968000000000;
+            my_order.OrderTime =new DateTime(tmp);
+                _context.Add(my_order);
+            if (_context.SaveChanges() > 0)
+                return new JsonResult(new { state = "success", message = "提交成功" });
+            else
+                return new JsonResult(new { state = "faild", message = "提交失败，请重新提交" });
+        }
+
         // GET: Orders
         public async Task<IActionResult> Index()
         {
