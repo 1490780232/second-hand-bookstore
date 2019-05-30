@@ -19,8 +19,8 @@
                 {{ nav.name }} <span class="caret"></span>
             </div>
             <ul class="dropdown-menu" style="min-width: 100%; text-align: center;">
-                <li><a href="#" onclick="go(this)">{{ nav.name }} </a></li>
-                <li  v-for="item in nav.array"><a href="#" onclick="go(this)">{{ item }}</a></li>
+                <li><a href="#" onclick="go(this.innerText)">{{ nav.name }} </a></li>
+                <li  v-for="item in nav.array"><a href="#" onclick="go(this.innerText)">{{ item }}</a></li>
             </ul>
         </div>    
     </div>
@@ -93,11 +93,11 @@
         }
     })
 
-    function go(el) {
+    function go(text) {
          $.ajax({
                 url: "/BookQuery/GetBooks",
                 data: {
-                    category: el.innerText,
+                    category: text,
                 },
                 type: "post",
                 cache: false,
@@ -115,6 +115,7 @@
                 }
 
             });
-        }
+    }
+    go("all");
 </script>
 

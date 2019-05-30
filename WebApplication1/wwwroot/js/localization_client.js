@@ -5,8 +5,8 @@
    var deg_cnt=0;
    function ToggleBasicClicked() {
                 try {
-                	hosturl = window.document.getElementById("serverip").value;	
-                    ws1 = new WebSocket("ws://"+hosturl+":9001",["localSensePush-protocol"]);//连接服务器
+                	//hosturl = window.document.getElementById("serverip").value;	
+                    ws1 = new WebSocket("ws://192.168.0.151:9001",["localSensePush-protocol"]);//连接服务器
 					ws1.onopen = function(event){Debug("已经与服务器建立了连接");alert("已经与服务器建立了连接\r\n当前连接状态："+this.readyState);};
 					ws1.onmessage = function(event) {
                         if (event.data instanceof Blob) {

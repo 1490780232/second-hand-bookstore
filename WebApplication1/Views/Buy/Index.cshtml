@@ -49,10 +49,6 @@
                     <label class="form-label">卖家：</label>
                     <label>{{ book.userName }}</label>
                 </div>
-                <div class="form-group" style="display:none;">
-                    <label class="form-label">书籍位置：</label>
-                    <label>{{ location }}</label>
-                </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-3">
@@ -73,7 +69,8 @@
     var buyapp = new Vue({
         el: "#buy-form",
         data: {
-            book: {                
+            book: {
+                BookId: "",       
                 BookName: "",
                 BookIbsn: "",
                 Author: "",
@@ -82,48 +79,82 @@
                 CurrPrice: "",
                 category: "",
                 userName: "",
-            },
-            location: "",
-            order: {
-                OrderId: "",
-                BookId: book.BookId,                
-                OrderTime: new Date().toJSON(),
-                OrderPrice: parseInt(book.CurrPrice),
-                OrderStatus: 1,
-                UserId: "",
-                bookName: book.BookName,
-                buyerName: getCookie("username"),
-                salerName: book.userName,
-                salerID: ""
-            },
+            }, 
+            isPay : false,          
         },
     });
-    function read() {
-
+    var qrcode = new QRCode(document.getElementById("qrcode"), { width: 180, height: 180 });    
+    function clearcode() {
+        $("#qrcode").html('<canvas width="180" height="180"></canvas><img alt="Scan me!" style="display: none;">')
+        $("#qrcode").removeAttr("title");
+    }
+    function read() {        
         $.get("/Books/BuyBooks", function (data, status) {
             console.log("Data: " + data.message + "\nStatus: " + status);
             buyapp.book = JSON.parse(data.message);
         })
+        clearcode()
     }
     function pay() {
         if (getCookie("username") == "") {
             alert("购买前请先登录");
             return;
         }
-        var qrcode = new QRCode(document.getElementById("qrcode"), { width: 180, height: 180 });
+        if(buyapp.book.CurrPrice == ""){
+            alert("请先读取书籍RFID");
+            return;
+        }
         qrcode.makeCode(buyapp.book.CurrPrice + "元");
+        buyapp.isPay = true;
     }
-    function commit() {
 
+    function commit() {
+        if(buyapp.book.CurrPrice == ""){
+            alert("请先读取书籍RFID");
+            return;
+        }
+        if(!buyapp.isPay){
+            alert("请先支付");
+            return;
+        }
         $.post(
-            "/",
+            "/Orders/Commit",
             {
-                order: buyapp.order
+                order: JSON.stringify({
+                    OrderId: "",
+                    BookId: buyapp.book.BookId,
+                    OrderTime: new Date().toJSON(),
+                    OrderPrice: parseInt(buyapp.book.CurrPrice),
+                    OrderStatus: 1,
+                    UserId: "123",
+                    bookName: buyapp.book.BookName,
+                    buyerName: getCookie("username"),
+                    salerName: buyapp.book.userName,
+                    salerID: "123"
+                }),
             },
             function (data, status) {
-
+                if(data.state == "success"){
+                    alert(data.message);
+                    buyapp.book = {
+                        BookId: "",       
+                        BookName: "",
+                        BookIbsn: "",
+                        Author: "",
+                        Press: "",
+                        OriPrice: "",
+                        CurrPrice: "",
+                        category: "",
+                        userName: "",
+                    };
+                    clearcode();
+                }else{
+                    alert(data.message)
+                }
             }
         )
     }
+    
+
 </script>
 
