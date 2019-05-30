@@ -144,7 +144,38 @@ namespace WebApplication1.Controllers
 
         public async Task<IActionResult> CheckBook()
         {
-            return View();
+            var orderList = (from p in _context.Book
+                             join b in _context.BookStatu
+                             on p.BookId equals b.BookId
+                             where b.CheckStatus == 0
+                             select p).ToListAsync();
+            return View(await orderList);
+        }
+        public async Task<IActionResult> check(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                BookStatu bs = await _context.BookStatu
+                .FirstOrDefaultAsync(m => m.BookId == id);
+                try
+                {
+                    _context.Update(bs);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!BookExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(CheckBook));
+            }
+            return RedirectToAction(nameof(CheckBook));
         }
 
 
