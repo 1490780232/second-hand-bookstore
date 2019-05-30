@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "寄卖书籍查询";
+    ViewData["Title"] = "在架书籍查询";
 }
 @model IEnumerable<WebApplication1.Models.Book>
 <link rel="stylesheet" href="~/css/user-center.css" />
@@ -7,13 +7,13 @@
     <ul class="nav nav-tabs nav-justified">
         <li role="presentation"><a href="/UserCenter/Index">交易统计</a></li>
         <li role="presentation"><a href="/UserCenter/UserInform">个人信息</a></li>
-        <li role="presentation"><a href="/UserCenter/CheckInform">审核查询</a></li>
-        <li role="presentation" class="active"><a :href="link1">寄卖查询</a></li>
+        <li role="presentation"><a :href="link2">售出书籍查询</a></li>
+        <li role="presentation" class="active"><a :href="link1">在架书籍查询</a></li>
         <li role="presentation"><a :href="link">订单查询</a></li>
     </ul>
 </div>
 
-<h3>寄卖书籍查询</h3>
+<h3>在架书籍</h3>
 <hr />
 <div class="row">
     <div class="col-md-18">
@@ -28,7 +28,7 @@
                     <th>书籍名</th>
                     <th>订单价格</th>
                     <th>订单时间</th>
-
+                    <th>审核状态</th>
                     <th>查看发票</th>
 
                 </tr>
@@ -61,7 +61,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.CurrPrice)
                     </td>
-
+                    <td class="status"></td>
                     <td>
                         <a asp-controller="Books" asp-action="Edit" asp-route-id="@item.BookId">修改</a>|
 
@@ -86,41 +86,48 @@
 
 
 
-<div class="check-informs" id="check-informs">
-    <div class="check-item" v-for="items in check_informs">
-        <span><img :src="items.img_src" /></span>
-        <span>{{ item.name }}</span>
-        <span>{{ item.type }}</span>
-        <span>{{ item.status }}</span>
-    </div>
-</div>
+
 
 <script>
-    var app = new Vue({
-        el: "#check-informs",
-        data: {
-            check_informs: [
-                {
-                    img_src: "/images/home/cplusplus.jpg",
-                    name: "C++程序设计",
-                    type: "出售",
-                    status: "审核中",
-                },
-                {
-                    img_src: "/images/home/cplusplus.jpg",
-                    name: "C++程序设计",
-                    type: "出售",
-                    status: "审核中",
-                },
-            ],
+    go(getCookie("username"));
+    function go(name1) {
+        $.ajax({
+            url: "/Books/GetBooks",
+            data: {
+                name: name1,
+            },
+            type: "post",
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                if (data.state == "success") {
+                    var list = $.parseJSON(data.suggest_book);
+                    $('.status').each(function (i, n) {
+                        if (list[i].BookStatus == 1) {
+                            $(n).html("已审核");
+                        }
+                        else {
+                            $(n).html("未审核");
+                        }
 
-        }
-    })
+                    });
+                }
+                else {
+                    alert("数据获取失败:" + data.message);
+                }
+            },
+            error: function (data) {
+                alert("数据获取失败，原因：超时或错误号:" + data.state + ",请稍后再试。");
+            }
+
+        });
+    }
     var app2 = new Vue({
         el: "#info-box",
         data: {
             link: "/UserCenter/MyOrder?id=" + getCookie("username"),
             link1: "/UserCenter/MySell?id=" + getCookie("username"),
+            link2: "/UserCenter/SaleBooks?id=" + getCookie("username"),
         }
     })
 </script>

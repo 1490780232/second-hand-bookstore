@@ -32,9 +32,23 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public IActionResult CheckInform()
+        public async Task<IActionResult> SaleBooks(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Order.Where(m => m.salerName == id).ToListAsync();
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+
+
         }
         public IActionResult Favorite()
         {
@@ -74,5 +88,25 @@ namespace WebApplication1.Controllers
             return View(order);
 
         }
+
+
+        public async Task<IActionResult> GetCurBook(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Book.Where(m => m.userName == id).ToListAsync();
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+
+        }
+
     }
 }

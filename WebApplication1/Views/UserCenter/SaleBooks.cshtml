@@ -1,10 +1,7 @@
-﻿@model IEnumerable<WebApplication1.Models.Order>
-
-@{
-    ViewData["Title"] = "订单查询";
+﻿@{
+    ViewData["Title"] = "已售出书籍";
 }
-
-
+@model IEnumerable<WebApplication1.Models.Order>
 <link rel="stylesheet" href="~/css/user-center.css" />
 <div id="info-box">
     <ul class="nav nav-tabs nav-justified">
@@ -12,16 +9,13 @@
         <li role="presentation"><a href="/UserCenter/UserInform">个人信息</a></li>
         <li role="presentation"><a :href="link2">售出书籍查询</a></li>
         <li role="presentation"><a :href="link1">在架书籍查询</a></li>
-        <li role="presentation" class="active"><a :href="link">订单查询</a></li>
+        <li role="presentation"><a :href="link">订单查询</a></li>
     </ul>
+    
 </div>
 
-
-<h3>订单查询</h3>
+<h3>已售出书籍</h3>
 <hr />
-
-
-
 
 
 
@@ -93,69 +87,14 @@
 
 
 
-
-
-
-
-
-<div class="check-informs" id="check-informs">
-    <div class="check-item" v-for="items in check_informs">
-        <span><img :src="items.img_src" /></span>
-        <span>{{ item.name }}</span>
-        <span>{{ item.type }}</span>
-        <span>{{ item.status }}</span>
-    </div>
-</div>
-
 <script>
-    var app = new Vue({
-        el: "#check-informs",
-        data: {
-            check_informs: [
-                {
-                    img_src: "/images/home/cplusplus.jpg",
-                    name: "C++程序设计",
-                    type: "出售",
-                    status: "审核中",
-                },
-                {
-                    img_src: "/images/home/cplusplus.jpg",
-                    name: "C++程序设计",
-                    type: "出售",
-                    status: "审核中",
-                },
-            ],
 
-        }
-    })
-    var app1 = new Vue({
-        el: "#check-informs",
-        data: {
-            check_informs: [
-                {
-                    img_src: "/images/home/cplusplus.jpg",
-                    name: "C++程序设计",
-                    type: "出售",
-                    status: "审核中",
-                },
-                {
-                    img_src: "/images/home/cplusplus.jpg",
-                    name: "C++程序设计",
-                    type: "出售",
-                    status: "审核中",
-                },
-            ],
-
-        }
-    })
-    var app1 = new Vue({
+    var app2 = new Vue({
         el: "#info-box",
         data: {
             link: "/UserCenter/MyOrder?id=" + getCookie("username"),
             link1: "/UserCenter/MySell?id=" + getCookie("username"),
             link2: "/UserCenter/SaleBooks?id=" + getCookie("username"),
-
         }
     })
-
 </script>
