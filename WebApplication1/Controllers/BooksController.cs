@@ -64,11 +64,19 @@ namespace WebApplication1.Controllers
                 re.WriteTag(null, epccode);
                 _context.Add(book1);
                  _context.SaveChanges();
+                BookStatu bs =new BookStatu
+                {
+                    BookId="",
+                    BookcaseId = "1",
+                    BookStatus= 0,
+                    CheckStatus=0 ,
+                    STime=DateTime.Now,
+                };
+                _context.Add(bs);
+                _context.SaveChanges();
                 re.Disconnect();
                 string getBook = JsonConvert.SerializeObject(book1);
-
                 return new JsonResult(new { state = "success", message = getBook, new_book = getBook});
-
             }
             catch
             {
