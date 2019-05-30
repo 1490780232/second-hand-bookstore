@@ -37,6 +37,9 @@
         <input type="radio" id="female" value="女" v-model="User.Sex">
         <label for="female">女</label>
     </div>
+    <div class="input-group">
+        <a class="btn" href="javascript:commit()">保存修改</a>
+    </div>
 </form>
 
     <script>
@@ -73,4 +76,18 @@
                 link1: "/UserCenter/MySell?id=" + getCookie("username"),
             }
         })
+
+        function commit() {
+            $.post(
+                "/Users/getInfo",
+                {
+                    user: app.User,
+                },
+                function (data) {
+                    if (data.state == "success") {
+                        alert("提交成功");
+                    }
+                }
+            )
+        }
     </script>

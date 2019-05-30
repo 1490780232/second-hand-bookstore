@@ -7,7 +7,7 @@
         <li role="presentation" class="active"><a href="javascript:void(0);">交易统计</a></li>
         <li role="presentation"><a href="/UserCenter/UserInform">个人信息</a></li>
         <li role="presentation"><a href="/UserCenter/CheckInform">审核查询</a></li>
-        <li role="presentation"><a href="/UserCenter/MySell">寄卖查询</a></li>
+        <li role="presentation"><a :href="link1" >寄卖查询</a></li>
         <li role="presentation"><a :href="link" id="OrderQuery">订单查询</a></li>
     </ul>
 
@@ -21,20 +21,21 @@
     var app = new Vue({
         el: "#info-box",
         data: {
-            books_inform: [
-                { label: "当前买入：", num: 3 },
-                { label: "当前卖出：", num: 3 },
-                { label: "即将超期：", num: 1 },
-                { label: "已经超期：", num: 2 },
-
-            ],
+            books_inform: {
+                buy: { label: "当前买入：", num: 3 },
+                sell: { label: "当前卖出：", num: 3 },
+                due: { label: "即将超期：", num: 1 },
+                overdue: { label: "已经超期：", num: 2 },
+            },
             link: "/UserCenter/MyOrder?id=" + getCookie("username"),
+            link1: "/UserCenter/MySell?id=" + getCookie("username"),
         }
     });
-
-    //$(document).ready(function () {
-    //    var username = getCookie("username");
-    //    var path = "/UserCenter/MyOrder?id=" + username;
-    //    $("#Go").attr("href", path);
-    //})
+        $.post(
+            "/Orders/Count",
+            { name: getCookie("username") },
+            (data) => { 
+                app.books_inform.buy.num = data.buy_num;
+                app.books_inform.sell.num = data.sell_num;
+             })
 </script>

@@ -15,18 +15,10 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        // public IActionResult User()
-        // {
-
-        //     ViewData["Message"] = "User";
-        //     return View();
-        // }
-
-        // public IActionResult Admin()
-        // {
-        //     ViewData["Message"] = "Admin";
-        //     return View();
-        // }
+        public IActionResult Reg()
+        {
+            return View();
+        }
 
     }
 }

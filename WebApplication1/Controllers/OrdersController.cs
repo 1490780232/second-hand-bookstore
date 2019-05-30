@@ -61,6 +61,12 @@ namespace WebApplication1.Controllers
             return View(order);
         }
 
+        public IActionResult Count(string name){
+            var buy_num =  _context.Order.Where(x => x.buyerName == name).Count();
+            var sell_num = _context.Order.Where(x => x.salerName == name).Count();
+            return new JsonResult(new { state = "success", buy_num, sell_num });
+        }
+
         public async Task<IActionResult> MyOrder(string id)
         {
             if (id == null)
