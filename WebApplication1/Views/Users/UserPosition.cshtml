@@ -1,80 +1,11 @@
 ﻿
 @{
-    ViewData["Title"] = "UserPosition";
+    ViewData["Title"] = "位置导航";
 }
 @{ Layout = "../Shared/_layout_1.cshtml"; }
 <html>
 <head>
     <script src="~/js/localization_client.js"></script>
-    <script>
-        //function test() {
-        //    $.ajax({
-        //        type: "get",
-        //        url: "/Books/Position",
-        //        timeout: 60000,
-        //        async: true,
-        //        dataType: "json",
-        //        success: function (data) {
-        //            var x = data.x + "px";
-        //            var y = data.y + "px";
-        //            $("#position").css({ "left": x, "top": y });
-        //            $("#loaction").html(data.x);
-        //        }
-        //    });
-        //}
-        //window.onload = function () {
-        //    test();
-        //    setInterval("test(),50000");
-
-        //}
-
-
-        //$(function () {
-
-        //    function check() {
-        //        var $bookname = $("#bookname");
-        //        $('tbody').html("");
-        //        $.ajax({
-        //            url: "/BookQuery/GetData",
-        //            data: {
-        //                bookname: $.trim($bookname.val())
-        //            },
-        //            type: "post",
-        //            cache: false,
-        //            //dataType: "json",
-        //            success: function (data) {
-        //                try {
-        //                    var tmpData = $.parseJSON(data/*.Data*/);
-        //                    for (var i = 0; i < tmpData.length; i++) {
-        //                        //var newRow = '<tr><td>' + tmpData[i].BookId + '</td><td>'
-        //                        var newRow = '<tr><td> ' + tmpData[i].BookId + '</td><td>'
-        //                            + tmpData[i].BookName + '</td><td>'
-        //                            + tmpData[i].BookIbsn + '</td><td>'
-        //                            + tmpData[i].Author + '</td><td>'
-        //                            + tmpData[i].Press + '</td><td>'
-        //                            + tmpData[i].OriPrice + '</td><td>'
-        //                            + tmpData[i].CurrPrice + '</td><td></tr>';
-        //                        $('tbody').append(newRow);
-
-        //                    }
-
-        //                }
-        //                catch (err) {
-        //                    alert("数据获取失败:" + err.message);
-        //                }
-        //            },
-        //            error: function (response) {
-        //                alert("数据获取失败，原因：超时或错误号:" + response.status + ",请稍后再试。");
-        //            }
-
-        //        });
-        //    }
-        //    $("#BookQuery_btn").click(function () { check(); })
-
-        //});
-    </script>
-
-
 
     <style>
 
