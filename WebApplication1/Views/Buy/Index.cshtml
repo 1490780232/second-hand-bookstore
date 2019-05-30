@@ -7,37 +7,43 @@
         display: inline-block;
         min-width: 80px;
     }
+    #buy-form{
+        display:flex;
+        justify-content:center;
+    }
 </style>
-<h2>买书  <small>购买前请先登录</small></h2>
+<h2>买书流程</h2>
 
 <div class="container-fluid">
     <div class="row" id="buy-form">
         <div class="col-md-4 col-sm-4">
             <div>
-                <a class="btn" href="javascript:read();">读取RFID</a>
+                <div class="form-group">
+                    <a class="btn" href="javascript:read();">读取RFID</a>
+                </div>                
                 <div class="form-group">
                     <label class="form-label">书籍名称：</label>
                     <label>{{ book.BookName }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">书籍ISBN：</label>
-                    <label>{{ book.BookISBN }}</label>
+                    <label>{{ book.BookIbsn }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">作者：</label>
-                    <label>{{ book.author }}</label>
+                    <label>{{ book.Author }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">出版社：</label>
-                    <label>{{ book.press }}</label>
+                    <label>{{ book.Press }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">书籍原价：</label>
-                    <label>￥{{ book.oriPrice }}</label>
+                    <label>￥{{ book.OriPrice }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">出手价格：</label>
-                    <label>￥{{ book.currPrice }}</label>
+                    <label>￥{{ book.CurrPrice }}</label>
                 </div>
                 <div class="form-group">
                     <label class="form-label">卖家：</label>
@@ -49,38 +55,75 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-4">
-            <a class="btn" href="javascript:read();">读取RFID</a>
-            <div class="img-box">
-                <img alt="这里有一张二维码"/>
+        <div class="col-md-3 col-sm-3">
+            <div class="form-group">
+                <a class="btn" href="javascript:pay();">结账</a>
+            </div>
+
+            <div id="qrcode">
+            </div>
+            <div class="form-group">
+                <a class="btn" href="javascript:commit();">提交订单</a>
             </div>
         </div>
     </div>
 </div>
-
+<script src="~/lib/qrcode.js"></script>
 <script>
     var buyapp = new Vue({
         el: "#buy-form",
         data: {
-            book: {
+            book: {                
                 BookName: "",
                 BookIbsn: "",
                 Author: "",
                 Press: "",
                 OriPrice: "",
                 CurrPrice: "",
+                category: "",
                 userName: "",
             },
             location: "",
+            order: {
+                OrderId: "",
+                BookId: book.BookId,                
+                OrderTime: new Date().toJSON(),
+                OrderPrice: parseInt(book.CurrPrice),
+                OrderStatus: 1,
+                UserId: "",
+                bookName: book.BookName,
+                buyerName: getCookie("username"),
+                salerName: book.userName,
+                salerID: ""
+            },
         },
     });
     function read() {
-        $.get("/Books/BuyBooks", function (data, status) {
-            alert("Data: " + data + "\nStatus: " + status);
-            buyapp.book = JSON.parse(data.message);
 
+        $.get("/Books/BuyBooks", function (data, status) {
+            console.log("Data: " + data.message + "\nStatus: " + status);
+            buyapp.book = JSON.parse(data.message);
         })
     }
+    function pay() {
+        if (getCookie("username") == "") {
+            alert("购买前请先登录");
+            return;
+        }
+        var qrcode = new QRCode(document.getElementById("qrcode"), { width: 180, height: 180 });
+        qrcode.makeCode(buyapp.book.CurrPrice + "元");
+    }
+    function commit() {
 
+        $.post(
+            "/",
+            {
+                order: buyapp.order
+            },
+            function (data, status) {
+
+            }
+        )
+    }
 </script>
 

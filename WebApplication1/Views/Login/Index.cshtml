@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>登陆 - 二手书屋</title>
+    <title>登录 - 二手书屋</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,8 +28,8 @@
                 var $username = $("#" + who + "Name");
                 var $password = $("#" + who + "Password");
                 //  检查表单完整性
-                $("#" + who + "-login-btn").attr('disabled', 'disabled') //禁用登陆按钮
-                $("#" + who + "-login-btn").html("登陆中...")
+                $("#" + who + "-login-btn").attr('disabled', 'disabled') //禁用登录按钮
+                $("#" + who + "-login-btn").html("登录中...")
                 $.ajax({
                     url: "/" + router + "/Check",
                     data: {
@@ -45,7 +45,7 @@
                             $("#" + who + "-login-btn").html(data.message);  
                             if (who == "user") {
                                 window.setTimeout(function () {
-                                    window.location.href = "/UserCenter/";
+                                    window.history.back()
                                 }, 500);
                             }
                             else {
@@ -56,7 +56,7 @@
                         }
                         else {
                             $("#" + who + "-login-btn").removeAttr('disabled'); //取消禁用
-                            $("#" + who + "-login-btn").html("登陆");
+                            $("#" + who + "-login-btn").html("登录");
                             $("#" + who + "name").focus();
                             alert(data.message);
                         }
@@ -93,14 +93,14 @@
             <input type="text" id="userName" class="form-control" placeholder="用户账号" required="" autofocus="">
             <label for="userPassword" class="sr-only">密码</label>
             <input type="password" id="userPassword" class="form-control" placeholder="密码" required="">
-            <button class="btn btn-lg btn-primary btn-block" id="user-login-btn">登陆</button>
+            <button class="btn btn-lg btn-primary btn-block" id="user-login-btn">登录</button>
         </form>
         <form class="form-signin" id="admin-login">
             <label for="adminName" class="sr-only">账户</label>
             <input type="text" id="adminName" class="form-control" placeholder="管理员账号" required="" autofocus="">
             <label for="adminPassword" class="sr-only">密码</label>
             <input type="password" id="adminPassword" class="form-control" placeholder="密码" required="">
-            <button class="btn btn-lg btn-primary btn-block" id="admin-login-btn">登陆</button>
+            <button class="btn btn-lg btn-primary btn-block" id="admin-login-btn">登录</button>
         </form>
     </div> <!-- /container -->
 
