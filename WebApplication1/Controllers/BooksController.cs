@@ -64,11 +64,19 @@ namespace WebApplication1.Controllers
                 re.WriteTag(null, epccode);
                 _context.Add(book1);
                  _context.SaveChanges();
+                BookStatu bs =new BookStatu
+                {
+                    BookId=book1.BookId,
+                    BookcaseId = "1",
+                    BookStatus= 0,
+                    CheckStatus=0 ,
+                    STime=DateTime.Now,
+                };
+                _context.Add(bs);
+                _context.SaveChanges();
                 re.Disconnect();
                 string getBook = JsonConvert.SerializeObject(book1);
-
                 return new JsonResult(new { state = "success", message = getBook, new_book = getBook});
-
             }
             catch
             {
@@ -313,5 +321,27 @@ namespace WebApplication1.Controllers
         {
             return _context.Book.Any(e => e.BookId == id);
         }
+
+
+
+        public IActionResult GetBooks(string name)
+        {
+            var orderList = (from p in _context.Book
+                             join b in _context.BookStatu
+                             on p.BookId equals b.BookId
+                             where p.userName == name
+                             select new
+                             {
+                                 BookId = b.BookId,
+                                 BookStatus = b.CheckStatus
+                             });
+            string getList = JsonConvert.SerializeObject(orderList);  //序列化
+            // ViewData["data"] = getList;                                                 
+            // return new JsonResult(new { state:"success",message = getList });
+            return new JsonResult(new { state = "success", suggest_book = getList, });
+            // return getList;
+        }
+
+
     }
 }
