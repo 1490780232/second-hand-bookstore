@@ -9,7 +9,7 @@
         <li role="presentation"><a href="/UserCenter/Index">交易统计</a></li>
         <li role="presentation" class="active"><a href="javascript:void(0);">个人信息</a></li>
         <li role="presentation"><a href="/UserCenter/CheckInform">审核查询</a></li>
-        <li role="presentation"><a href="/UserCenter/MySell">寄卖查询</a></li>
+        <li role="presentation"><a :href="link1">寄卖查询</a></li>
         <li role="presentation"><a :href="link">订单查询</a></li>
     </ul>
 </div>
@@ -70,6 +70,7 @@
             el: "#info-box",
             data: {
                 link: "/UserCenter/MyOrder?id=" + getCookie("username"),
+                link1: "/UserCenter/MySell?id=" + getCookie("username"),
             }
         })
     </script>

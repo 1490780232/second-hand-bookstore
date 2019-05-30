@@ -1,10 +1,9 @@
-﻿@model WebApplication1.Models.Order
+﻿@model WebApplication1.Models.Book
 
 @{
     ViewData["Title"] = "Details";
 }
-@{ Layout = "../Shared/_layout_2.cshtml"; }
-
+@{ Layout = "../Shared/_layout_1.cshtml"; }
 
 <head>
     <style type="text/css">
@@ -45,43 +44,49 @@
             line-height: 50px;
         }
 
+            p.header-p span {
+                margin: 0 200px 0 0;
+            }
+
+            p.footer-p span {
+                margin: 0 150px 0 0;
+            }
         .header-p {
             display: flex;
             justify-content: space-around;
         }
-
         .footer-p {
             display: flex;
             justify-content: space-around;
         }
-
-        #fapiao {
-            padding-top: 50px;
-            margin: 0 auto;
-        }
     </style>
 </head>
-
-<div id="fapiao">
-    <h3>二手无人书店购书发票</h3>
-    <div class="header-p"><span>订单编号：@Model.OrderId </span><span>订单时间：@Model.OrderTime</span></div>
+@{ 
+    string id = Model.BookIbsn.Substring(3) + Model.BookId.Substring(2);
+}
+<div>
+    <h3>二手无人书店寄卖发票</h3>
+    <div class="header-p"><span>寄卖单号：@id </span><span>寄卖时间：2017-09-04</span></div>
     <table width="800px" border="1" cellpadding="10" align="center" cellspacing="0">
 
         <tr>
             <th>顺序号</th>
             <th>图书编号</th>
             <th>图书名称</th>
-            <th>数量</th>
-            <th>图书价格</th>
+            <th>图书种类</th>
+            <th>图书数量</th>
+            <th>寄卖价格</th>
         </tr>
         <tr>
             <td>1</td>
-            <td>@Model.BookId   </td>
-            <td>@Model.bookName</td>
+            <td>@Model.BookId</td>
+            <td>@Model.BookName</td>
+            <td>@Model.category</td>
             <td>1</td>
-            <td>@Model.OrderPrice</td>
+            <td>@Model.CurrPrice</td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
@@ -92,13 +97,11 @@
             <td>合计</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
             <td>1</td>
-            <td>@Model.OrderPrice</td>
+            <td>@Model.CurrPrice</td>
         </tr>
     </table>
-    <div class="footer-p"><span>买方：@Model.buyerName</span><span>卖方：@Model.salerName</span><span>开票人：李华    </span></div>
+    <div class="footer-p"><span>买方：@Model.userName</span><span>开票人：二手书店</span></div>
 </div>
-
-
-
 <a href="javascript:history.go(-1)">返回</a>

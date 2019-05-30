@@ -116,6 +116,22 @@ namespace WebApplication1.Controllers
             
             
         }
+        public async Task<IActionResult> GetReciept(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Book
+                .FirstOrDefaultAsync(m => m.BookId == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
         public async Task<IActionResult> BookPosition()
         {
             return View();
