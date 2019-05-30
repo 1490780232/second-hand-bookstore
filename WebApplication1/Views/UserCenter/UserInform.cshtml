@@ -4,46 +4,55 @@
 }
 <link rel="stylesheet" href="~/css/user-center.css" />
 
-<ul class="nav nav-tabs nav-justified">
-    <li role="presentation"><a href="/UserCenter/Index">交易统计</a></li>
-    <li role="presentation" class="active"><a href="javascript:void(0);">个人信息</a></li>
-    <li role="presentation"><a href="/UserCenter/CheckInform">审核查询</a></li>
-    <li role="presentation"><a href="/UserCenter/Favorite">收藏夹</a></li>
-    <li role="presentation"><a href="/UserCenter/MyOrder">订单查询</a></li>
-</ul>
+<div id="info-box">
+    <ul class="nav nav-tabs nav-justified">
+        <li role="presentation"><a href="/UserCenter/Index">交易统计</a></li>
+        <li role="presentation" class="active"><a href="javascript:void(0);">个人信息</a></li>
+        <li role="presentation"><a href="/UserCenter/CheckInform">审核查询</a></li>
+        <li role="presentation"><a href="/UserCenter/MySell">寄卖查询</a></li>
+        <li role="presentation"><a :href="link">订单查询</a></li>
+    </ul>
+</div>
+    <form id="user-form" class="user-form">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">用 户 名：</span>
+            <input type="text" class="form-control" v-model="User.UserName">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">支 付 宝：</span>
+            <input type="text" class="form-control" v-model="User.AlipayAccount">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">联系方式：</span>
+            <input type="text" class="form-control" v-model="User.ContactInfo">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">电子邮件：</span>
+            <input type="text" class="form-control" v-model="User.Mail">
+        </div>
+    </form>
 
-<form id="user-form" class="user-form">
-    <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">用 户 名：</span>
-        <input type="text" class="form-control" v-model="User.UserName">
-    </div>
-    <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">支 付 宝：</span>
-        <input type="text" class="form-control" v-model="User.AlipayAccount">
-    </div>
-    <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">联系方式：</span>
-        <input type="text" class="form-control" v-model="User.ContactInfo">
-    </div>
-    <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">电子邮件：</span>
-        <input type="text" class="form-control" v-model="User.Mail">
-    </div>    
-</form>
+    <script>
+        var app = new Vue({
+            el: "#user-form",
+            data: {
+                User: {
+                    UserId: "A001",
+                    UserName: "李珊",
+                    AlipayAccount: "18186144331",
+                    ContactInfo: "18186144331",
+                    Mail: "lishan1014@qq.com",
+                    Password: "123",
+                    Sex: null,
+                },
 
-<script>
-    var app = new Vue({
-        el: "#user-form",
-        data: {
-            User: {
-                UserId: "A001",
-                UserName: "李珊",
-                AlipayAccount: "18186144331",
-                ContactInfo: "18186144331",
-                Mail: "lishan1014@qq.com",
-                Password: "123",
-                Sex: null,
             },
-        }
-    });
-</script>
+
+        });
+        var app2 = new Vue({
+            el: "#info-box",
+            data: {
+                link: "/UserCenter/MyOrder?id=" + getCookie("username"),
+            }
+        })
+    </script>

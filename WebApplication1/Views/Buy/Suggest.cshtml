@@ -37,13 +37,15 @@
                         <th>出版社</th>
                         <th>原价</th>
                         <th>现价</th>
+                        <th>位置</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="book in books">
                         <th v-for="value in book">
                             <span>{{ value }}</span>
-                        </th>                        
+                        </th>  
+                        <th><a href="/Book/Index?"+></a></th>
                     </tr>
                 </tbody>
             </table>

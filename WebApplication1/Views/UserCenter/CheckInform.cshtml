@@ -2,14 +2,16 @@
     ViewData["Title"] = "审核信息";
 }
 <link rel="stylesheet" href="~/css/user-center.css" />
+<div id="info-box">
+    <ul class="nav nav-tabs nav-justified">
+        <li role="presentation"><a href="/UserCenter/Index">交易统计</a></li>
+        <li role="presentation"><a href="/UserCenter/UserInform">个人信息</a></li>
+        <li role="presentation" class="active"><a href="javascript:void(0);">审核查询</a></li>
+        <li role="presentation"><a href="/UserCenter/Favorite">寄卖查询</a></li>
+        <li role="presentation"><a :href="link">订单查询</a></li>
+    </ul>
 
-<ul class="nav nav-tabs nav-justified">
-    <li role="presentation"><a href="/UserCenter/Index">交易统计</a></li>
-    <li role="presentation"><a href="/UserCenter/UserInform">个人信息</a></li>
-    <li role="presentation" class="active"><a href="javascript:void(0);">审核查询</a></li>
-    <li role="presentation"><a href="/UserCenter/Favorite">收藏夹</a></li>
-    <li role="presentation"><a href="/UserCenter/MyOrder">订单查询</a></li>
-</ul>
+</div>
 
 <h3>审核状态查询</h3>
 <hr />
@@ -40,7 +42,14 @@
                     type: "出售",
                     status: "审核中",
                 },
-            ]
+                
+            ],
+        }
+    })
+    var app2 = new Vue({
+        el: "#info-box",
+        data: {
+            link: "/UserCenter/MyOrder?id=" + getCookie("username"),
         }
     })
 </script>

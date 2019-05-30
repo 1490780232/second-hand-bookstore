@@ -44,6 +44,25 @@ namespace WebApplication1.Controllers
 
             return View(order);
         }
+        public async Task<IActionResult> MyOrder(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+            var orderList =  from p in _context.Order
+                            where p.buyerName == id
+                            select p;
+            var order = orderList.ToListAsync();
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
         public async Task<IActionResult> GetReciept(string id)
         {
             if (id == null)
