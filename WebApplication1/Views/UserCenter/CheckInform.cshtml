@@ -17,8 +17,8 @@
 <hr />
 
 <div class="check-informs" id="check-informs">
-    <div class="check-item" v-for="items in check_informs">
-        <span><img :src="items.img_src" /></span>
+    <div class="check-item" v-for="item in check_informs">
+        <span><img :src="item.img_src" /></span>
         <span>{{ item.name }}</span>
         <span>{{ item.type }}</span>
         <span>{{ item.status }}</span>
@@ -30,19 +30,12 @@
         el: "#check-informs",
         data: {
             check_informs: [
-                {
-                    img_src: "/images/home/cplusplus.jpg",
+                {     
+                    BookId： ""               
                     name: "C++程序设计",
                     type: "出售",
                     status: "审核中",
                 },
-                {
-                    img_src: "/images/home/cplusplus.jpg",
-                    name: "C++程序设计",
-                    type: "出售",
-                    status: "审核中",
-                },
-                
             ],
         }
     })
