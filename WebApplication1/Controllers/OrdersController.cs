@@ -44,7 +44,22 @@ namespace WebApplication1.Controllers
 
             return View(order);
         }
+        public async Task<IActionResult> GetReciept(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var order = await _context.Order
+                .FirstOrDefaultAsync(m => m.OrderId == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
         // GET: Orders/Create
         public IActionResult Create()
         {

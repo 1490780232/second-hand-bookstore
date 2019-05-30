@@ -120,7 +120,10 @@ namespace WebApplication1.Controllers
             
             
         }
-
+        public async Task<IActionResult> BookPosition()
+        {
+            return View();
+        }
 
         public BooksController(bookstoreContext context)
         {
