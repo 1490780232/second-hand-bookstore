@@ -1,7 +1,77 @@
-﻿
+﻿@{ Layout = "../Shared/_layout_2.cshtml"; }
+@model IEnumerable<WebApplication1.Models.Book>
+
+
 @{
-    ViewData["Title"] = "CheckBook";
+    ViewData["Title"] = "书籍审核";
 }
 
-<h2>CheckBook</h2>
+<h3 class="page-title">尚未审核的书籍</h3>
+<div class="row">
+    <div class="col-md-18">
+        <!-- BASIC TABLE -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>书籍id</th>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>出版社</th>
+                    <th>原价</th>
+                    <th>现价</th>
 
+                    <th>类别</th>
+                    <th>审核</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Author)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Press)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OriPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CurrPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.category)
+                        </td>
+
+                        <td>
+                            <a asp-controller="Books" asp-action="Check" asp-route-id="@item.BookId">审核</a> 
+                            @*<a asp-action="Details" asp-route-id="@item.BookId">Details</a> |*@
+                            @*<a asp-action="Delete" asp-route-id="@item.BookId">删除</a>*@
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/scripts/klorofil-common.js"></script>
+    <script src="~/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/scripts/klorofil-common.js"></script>
+
+    <!-- END WRAPPER -->

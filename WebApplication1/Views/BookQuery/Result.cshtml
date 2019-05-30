@@ -79,7 +79,8 @@ ViewData["Title"] = "书籍查询结果";
                                 + tmpData[i].Author + '</td><td>'
                                 + tmpData[i].Press + '</td><td>'
                                 + tmpData[i].OriPrice + '</td><td>'
-                                + tmpData[i].CurrPrice + '</td><td></tr>';
+                                + tmpData[i].CurrPrice + '</td><td>' +
+                               ' <a href="/Books/BookPosition">位置</a></td></tr>';
                             $('tbody').append(newRow);
 
                         }

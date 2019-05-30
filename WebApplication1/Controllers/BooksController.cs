@@ -144,7 +144,39 @@ namespace WebApplication1.Controllers
 
         public async Task<IActionResult> CheckBook()
         {
-            return View();
+            var orderList = (from p in _context.Book
+                             join b in _context.BookStatu
+                             on p.BookId equals b.BookId
+                             where b.CheckStatus == 0
+                             select p).ToListAsync();
+            return View(await orderList);
+        }
+        public async Task<IActionResult> check(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                var bs = await _context.BookStatu
+                .FirstOrDefaultAsync(m => m.BookId == id);
+                try
+                {
+                    bs.CheckStatus = 1;
+                    _context.Update(bs);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!BookExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(CheckBook));
+            }
+            return RedirectToAction(nameof(CheckBook));
         }
 
 
@@ -222,7 +254,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit( [Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book)
+        public async Task<IActionResult> Edit( [Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice,category,userName")] Book book)
         {
 
             if (ModelState.IsValid)

@@ -130,19 +130,19 @@ namespace WebApplication1.Models
 
                 entity.Property(e => e.CheckStatus).HasColumnName("checkStatus");
 
-                entity.Property(e => e.Rfid)
-                    .HasColumnName("RFID")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+                //entity.Property(e => e.Rfid)
+                //    .HasColumnName("RFID")
+                //    .HasMaxLength(20)
+                //    .IsUnicode(false);
 
                 entity.Property(e => e.STime)
                     .HasColumnName("sTime")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.SellerId)
-                    .HasColumnName("sellerID")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+                //entity.Property(e => e.SellerId)
+                //    .HasColumnName("sellerID")
+                //    .HasMaxLength(20)
+                //    .IsUnicode(false);
             });
 
             modelBuilder.Entity<CheckBook>(entity =>
