@@ -83,9 +83,22 @@ namespace WebApplication1.Controllers
             return getList;
         }
         public IActionResult GetBooks(string category)
-        {
-            var orderList = from p in _context.Book
-                            where p.category==category
+        {            
+            var orderList = (from p in _context.Book
+                             select new
+                             {
+                                 BookId = p.BookId,
+                                 BookName = p.BookName,
+                                 BookIbsn = p.BookIbsn,
+                                 Author = p.Author,
+                                 Press = p.Press,
+                                 OriPrice = p.OriPrice,
+                                 CurrPrice = p.CurrPrice,
+                             }).Take(10);
+        
+            if (category !="all") {
+                orderList = from p in _context.Book
+                            where p.category == category
                             select new
                             {
                                 BookId = p.BookId,
@@ -94,8 +107,9 @@ namespace WebApplication1.Controllers
                                 Author = p.Author,
                                 Press = p.Press,
                                 OriPrice = p.OriPrice,
-                                CurrPrice = p.CurrPrice,                                
+                                CurrPrice = p.CurrPrice,
                             };
+            }
             string getList = JsonConvert.SerializeObject(orderList);  //序列化
             // ViewData["data"] = getList;                                                 
             // return new JsonResult(new { state:"success",message = getList });

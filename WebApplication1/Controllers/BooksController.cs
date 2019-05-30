@@ -49,18 +49,14 @@ namespace WebApplication1.Controllers
             int a=_context.Book.Count()+1;
 
             string id = Convert.ToString(a);
-
-
             book1 = JsonConvert.DeserializeObject<Book>(book);
             book1.BookId = "00" + id;
-
 
             bool flag = connect();
             if (flag == false)
             {
                 return new JsonResult(new { state = "failed", message = "固定读写器未连接上" });
             }
-
             try
             {
                 string s = book1.BookId;
