@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WebApplication1.Models.BookStatu>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookcaseId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rfid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SellerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.STime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookcaseId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rfid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SellerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.STime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

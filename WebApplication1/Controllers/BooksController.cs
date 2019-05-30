@@ -142,6 +142,12 @@ namespace WebApplication1.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> CheckBook()
+        {
+            return View();
+        }
+
+
 
         public async Task<IActionResult> OperateBooks()
         {
@@ -216,12 +222,8 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book)
+        public async Task<IActionResult> Edit( [Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book)
         {
-            if (id != book.BookId)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
@@ -241,7 +243,7 @@ namespace WebApplication1.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(OperateBooks));
             }
             return View(book);
         }

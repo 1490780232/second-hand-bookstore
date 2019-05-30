@@ -126,12 +126,9 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("UserId,UserName,AlipayAccount,ContactInfo,Mail")] Users users)
+        public async Task<IActionResult> Edit( [Bind("UserId,UserName,AlipayAccount,ContactInfo,Mail")] Users users)
         {
-            if (id != users.UserId)
-            {
-                return NotFound();
-            }
+
 
             if (ModelState.IsValid)
             {
@@ -151,7 +148,7 @@ namespace WebApplication1.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(OperateUsers));
             }
             return View(users);
         }

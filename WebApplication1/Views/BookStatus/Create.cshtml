@@ -1,0 +1,60 @@
+﻿@model WebApplication1.Models.BookStatu
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>BookStatu</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BookId" class="control-label"></label>
+                <input asp-for="BookId" class="form-control" />
+                <span asp-validation-for="BookId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookcaseId" class="control-label"></label>
+                <input asp-for="BookcaseId" class="form-control" />
+                <span asp-validation-for="BookcaseId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookStatus" class="control-label"></label>
+                <input asp-for="BookStatus" class="form-control" />
+                <span asp-validation-for="BookStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CheckStatus" class="control-label"></label>
+                <input asp-for="CheckStatus" class="form-control" />
+                <span asp-validation-for="CheckStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rfid" class="control-label"></label>
+                <input asp-for="Rfid" class="form-control" />
+                <span asp-validation-for="Rfid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SellerId" class="control-label"></label>
+                <input asp-for="SellerId" class="form-control" />
+                <span asp-validation-for="SellerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="STime" class="control-label"></label>
+                <input asp-for="STime" class="form-control" />
+                <span asp-validation-for="STime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

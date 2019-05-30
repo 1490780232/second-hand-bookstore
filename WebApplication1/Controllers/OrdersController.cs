@@ -139,12 +139,8 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("OrderId,BookId,UserId,OrderTime,OrderPrice,OrderStatus")] Order order)
+        public async Task<IActionResult> Edit( [Bind("OrderId,BookId,UserId,OrderTime,OrderPrice,OrderStatus")] Order order)
         {
-            if (id != order.OrderId)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
@@ -164,7 +160,7 @@ namespace WebApplication1.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(OperateOrder));
             }
             return View(order);
         }

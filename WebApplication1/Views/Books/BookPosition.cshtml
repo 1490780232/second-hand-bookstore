@@ -8,12 +8,15 @@
     <script src="~/js/localization_client.js"></script>
     <script>
         $(function () {
+
+            var i=Math.round(Math.random() * 4)
             var x = ["50px", "50px", "50px", "50px"]
-            var y = ["390px", "459px", "520px", "580px"]
+            var y = ["400px", "459px", "520px", "580px"]
             $("#book_position").css({
                 "right": x[3],
-                "top": y[2]
+                "top": y[i]
             });
+            
         });
         //function test() {
         //    $.ajax({

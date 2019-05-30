@@ -82,12 +82,9 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("BookcaseId,Category,Rfid")] Bookcase bookcase)
+        public async Task<IActionResult> Edit([Bind("BookcaseId,Category,Rfid")] Bookcase bookcase)
         {
-            if (id != bookcase.BookcaseId)
-            {
-                return NotFound();
-            }
+
 
             if (ModelState.IsValid)
             {

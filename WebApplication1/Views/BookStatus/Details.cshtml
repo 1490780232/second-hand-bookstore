@@ -1,0 +1,54 @@
+﻿@model WebApplication1.Models.BookStatu
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BookStatu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookcaseId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BookcaseId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BookStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BookStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CheckStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Rfid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Rfid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SellerId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SellerId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.STime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.STime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BookId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
