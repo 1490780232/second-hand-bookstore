@@ -14,6 +14,5 @@ namespace WebApplication1.Models
         public string BookCategory   { get; set; }
         public int BookNum { get; set; }
         public int TotalValue { get; set; }
-
     }
 }

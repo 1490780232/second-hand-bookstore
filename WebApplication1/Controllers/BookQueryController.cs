@@ -37,13 +37,15 @@ namespace WebApplication1.Controllers
         }
         public IActionResult CheckBook()
         {
-                        return View();
+            return View();
         }
 
         public string GetData(string bookname)
         {
             var orderList = from p in _context.Book
-                            where p.BookName.Contains(bookname)
+                            join b in _context.BookStatu
+                            on p.BookId equals b.BookId
+                            where p.BookName.Contains(bookname) && b.BookStatus==0 &&b.CheckStatus ==1
                             select new
                             {
                                 BookId = p.BookId,
@@ -54,6 +56,7 @@ namespace WebApplication1.Controllers
                                 OriPrice = p.OriPrice,
                                 CurrPrice = p.CurrPrice
                             };
+
             string getList = JsonConvert.SerializeObject(orderList);  //序列化
             // ViewData["data"] = getList;                                                  // return new JsonResult(new { Data = getList });
             return getList;
@@ -87,8 +90,6 @@ namespace WebApplication1.Controllers
                             };
             }
             string getList = JsonConvert.SerializeObject(orderList);  //序列化
-            // ViewData["data"] = getList;                                                 
-            // return new JsonResult(new { state:"success",message = getList });
             return new JsonResult(new { state = "success", suggest_book= getList,});
             // return getList;
         }

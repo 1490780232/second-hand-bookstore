@@ -24,8 +24,7 @@
             books_inform: {
                 buy: { label: "当前买入：", num: 3 },
                 sell: { label: "当前卖出：", num: 3 },
-                due: { label: "即将超期：", num: 1 },
-                overdue: { label: "已经超期：", num: 2 },
+                due: { label: "未售出：", num: 1 },                
             },
             link: "/UserCenter/MyOrder?id=" + getCookie("username"),
             link1: "/UserCenter/MySell?id=" + getCookie("username"),
@@ -37,5 +36,6 @@
             (data) => { 
                 app.books_inform.buy.num = data.buy_num;
                 app.books_inform.sell.num = data.sell_num;
+                app.books_inform.due.num = data.due_num;
              })
 </script>

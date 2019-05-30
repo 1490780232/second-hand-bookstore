@@ -63,6 +63,9 @@ namespace WebApplication1.Controllers
         public IActionResult Count(string name){
             var buy_num =  _context.Order.Where(x => x.buyerName == name).Count();
             var sell_num = _context.Order.Where(x => x.salerName == name).Count();
+            //var due_num = from p in _context.Book                          
+            //              where 
+
             return new JsonResult(new { state = "success", buy_num, sell_num });
         }
 
