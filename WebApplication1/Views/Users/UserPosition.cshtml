@@ -2,32 +2,33 @@
 @{
     ViewData["Title"] = "UserPosition";
 }
-@{ Layout = "../Shared/_layout_1.cshtml"; }	
+@{ Layout = "../Shared/_layout_1.cshtml"; }
 <html>
 <head>
+    <script src="~/js/localization_client.js"></script>
     <script>
-        function test() {
-            $.ajax({
-                type: "get",
-                url: "/Books/Position",
-                timeout: 60000,
-                async: true,
-                dataType: "json",
-                success: function (data) {
-                    var x = data.x + "px";
-                    var y = data.y + "px";
-                    $("#position").css({ "left": x, "top": y });
-                    $("#loaction").html(data.x);
-                }
-            });
-        }
-        window.onload = function () {
-            test();
-            setInterval("test(),50000");
+        //function test() {
+        //    $.ajax({
+        //        type: "get",
+        //        url: "/Books/Position",
+        //        timeout: 60000,
+        //        async: true,
+        //        dataType: "json",
+        //        success: function (data) {
+        //            var x = data.x + "px";
+        //            var y = data.y + "px";
+        //            $("#position").css({ "left": x, "top": y });
+        //            $("#loaction").html(data.x);
+        //        }
+        //    });
+        //}
+        //window.onload = function () {
+        //    test();
+        //    setInterval("test(),50000");
 
-        }
+        //}
 
- 
+
         //$(function () {
 
         //    function check() {
@@ -76,20 +77,28 @@
 
 
     <style>
+
         #map {
-            background: url(/assets/img/background.png) no-repeat 0px 0px;
-            border: 1px solid #F00;
-            width: 642px;
-            height: 457px;
+            background: url(/assets/img/background3.png) no-repeat 0px 0px;
+            border: 1px solid #f5f5fa;
+            width: 850px;
+            height: 975px;
             position: relative;
+            margin: 0 auto;
         }
 
         #position {
             width: 30px;
-
             position: absolute;
-            left: 100px;
+            right: 100px;
             top: 100px;
+        }
+
+        #title {
+            text-align: center
+        }
+        #certern {
+            text-align: center
         }
     </style>
 </head>
@@ -98,9 +107,12 @@
 </body>
 </html>
 
-<h2>UserPosition</h2>
+<h1 id="title">地图导航</h1>
+<div id="certern">
+    <button class="btn " type="button" onclick="ToggleBasicClicked()">开始导航</button>
+</div>
 
-<div id="map" background="~/assets/img/background.png">
+<div id="map">
     <img src="~/assets/img/location.png" id="position" />
 
 </div>

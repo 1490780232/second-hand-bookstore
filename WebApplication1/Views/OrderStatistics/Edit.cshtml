@@ -3,34 +3,33 @@
 @{
     ViewData["Title"] = "Edit";
 }
+@{ Layout = "../Shared/_layout_2.cshtml"; }
+<h2>修改订单统计量</h2>
 
-<h2>Edit</h2>
-
-<h4>OrderStatistics</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger">时间</div>
             <input type="hidden" asp-for="time" />
             <div class="form-group">
-                <label asp-for="BookNum" class="control-label"></label>
+                <label asp-for="BookNum" class="control-label">书籍数量</label>
                 <input asp-for="BookNum" class="form-control" />
                 <span asp-validation-for="BookNum" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TotalValue" class="control-label"></label>
+                <label asp-for="TotalValue" class="control-label">价值总计</label>
                 <input asp-for="TotalValue" class="form-control" />
                 <span asp-validation-for="TotalValue" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="保存" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">返回列表</a>
 </div>
 
