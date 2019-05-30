@@ -1,19 +1,95 @@
 ﻿@{
     ViewData["Title"] = "寄卖书籍查询";
 }
+@model IEnumerable<WebApplication1.Models.Book>
 <link rel="stylesheet" href="~/css/user-center.css" />
 <div id="info-box">
     <ul class="nav nav-tabs nav-justified">
         <li role="presentation"><a href="/UserCenter/Index">交易统计</a></li>
         <li role="presentation"><a href="/UserCenter/UserInform">个人信息</a></li>
         <li role="presentation"><a href="/UserCenter/CheckInform">审核查询</a></li>
-        <li role="presentation" class="active"><a href="javascript:void(0);">寄卖查询</a></li>
+        <li role="presentation" class="active"><a :href="link1">寄卖查询</a></li>
         <li role="presentation"><a :href="link">订单查询</a></li>
     </ul>
 </div>
 
 <h3>寄卖书籍查询</h3>
 <hr />
+
+
+
+
+
+<div class="row">
+    <div class="col-md-18">
+        <!-- BASIC TABLE -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>订单id</th>
+                    <th>买家名</th>
+                    <th>卖家名</th>
+                    <th>书籍id</th>
+                    <th>书籍名</th>
+                    <th>订单价格</th>
+                    <th>订单时间</th>
+
+                    <th>查看发票</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookId)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookIbsn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Press)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OriPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrPrice)
+                    </td>
+
+                    <td>
+                        <a asp-controller="Books" asp-action="GetReciept" asp-route-id="@item.BookId">发票</a>|
+
+                        <a asp-controller="Books" asp-action="GetReciept" asp-route-id="@item.BookId">寄卖发票</a>
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="check-informs" id="check-informs">
     <div class="check-item" v-for="items in check_informs">
@@ -42,13 +118,14 @@
                     status: "审核中",
                 },
             ],
-            
+
         }
     })
     var app2 = new Vue({
         el: "#info-box",
         data: {
             link: "/UserCenter/MyOrder?id=" + getCookie("username"),
+            link1: "/UserCenter/MySell?id=" + getCookie("username"),
         }
     })
 </script>

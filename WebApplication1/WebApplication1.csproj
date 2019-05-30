@@ -45,7 +45,7 @@
     <Content Update="Views\UserCenter\MyOrder.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\UserCenter\Favorite.cshtml">
+    <Content Update="Views\UserCenter\MySell.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

@@ -6,14 +6,16 @@
 
 
 <link rel="stylesheet" href="~/css/user-center.css" />
+<div id="info-box">
+    <ul class="nav nav-tabs nav-justified">
+        <li role="presentation"><a href="/UserCenter/Index">交易统计</a></li>
+        <li role="presentation"><a href="/UserCenter/UserInform">个人信息</a></li>
+        <li role="presentation"><a href="/UserCenter/CheckInform">审核查询</a></li>
+        <li role="presentation"><a :href="link1">寄卖查询</a></li>
+        <li role="presentation" class="active"><a :href="link">订单查询</a></li>
+    </ul>
+</div>
 
-<ul class="nav nav-tabs nav-justified">
-    <li role="presentation"><a href="/UserCenter/Index">交易统计</a></li>
-    <li role="presentation"><a href="/UserCenter/UserInform">个人信息</a></li>
-    <li role="presentation"><a href="/UserCenter/CheckInform">审核查询</a></li>
-    <li role="presentation"><a href="/UserCenter/Favorite">寄卖查询</a></li>
-    <li role="presentation" class="active"><a :href="link">订单查询</a></li>
-</ul>
 
 <h3>订单查询</h3>
 <hr />
@@ -123,7 +125,36 @@
                     status: "审核中",
                 },
             ],
-                            link: "/UserCenter/MyOrder?id=" + getCookie("username"),
+
         }
     })
+    var app1 = new Vue({
+        el: "#check-informs",
+        data: {
+            check_informs: [
+                {
+                    img_src: "/images/home/cplusplus.jpg",
+                    name: "C++程序设计",
+                    type: "出售",
+                    status: "审核中",
+                },
+                {
+                    img_src: "/images/home/cplusplus.jpg",
+                    name: "C++程序设计",
+                    type: "出售",
+                    status: "审核中",
+                },
+            ],
+
+        }
+    })
+    var app1 = new Vue({
+        el: "#info-box",
+        data: {
+            link: "/UserCenter/MyOrder?id=" + getCookie("username"),
+            link1: "/UserCenter/MySell?id=" + getCookie("username"),
+
+        }
+    })
+
 </script>
