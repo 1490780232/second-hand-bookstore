@@ -66,7 +66,7 @@ namespace WebApplication1.Controllers
                  _context.SaveChanges();
                 BookStatu bs =new BookStatu
                 {
-                    BookId="",
+                    BookId=book1.BookId,
                     BookcaseId = "1",
                     BookStatus= 0,
                     CheckStatus=0 ,

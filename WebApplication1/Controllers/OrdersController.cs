@@ -29,7 +29,10 @@ namespace WebApplication1.Controllers
             my_order.OrderId = "000"+(_context.Order.Count() + 1);            
             var tmp = (Convert.ToInt64(date) * 10000) + 621355968000000000;
             my_order.OrderTime =new DateTime(tmp).AddHours(8);
-            _context.Add(my_order);            
+            _context.Add(my_order);
+            BookStatu bs = _context.BookStatu.First(m => m.BookId == my_order.BookId);
+            bs.BookStatus = 1;
+            _context.Add(bs);
             if (_context.SaveChanges() > 0)
                 return new JsonResult(new { state = "success", message = "提交成功" });
             else
