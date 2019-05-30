@@ -13,42 +13,59 @@
         <li role="presentation"><a :href="link">订单查询</a></li>
     </ul>
 </div>
-    <form id="user-form" class="user-form">
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">用 户 名：</span>
-            <input type="text" class="form-control" v-model="User.UserName">
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">支 付 宝：</span>
-            <input type="text" class="form-control" v-model="User.AlipayAccount">
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">联系方式：</span>
-            <input type="text" class="form-control" v-model="User.ContactInfo">
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">电子邮件：</span>
-            <input type="text" class="form-control" v-model="User.Mail">
-        </div>
-    </form>
+<form id="user-form" class="user-form">
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">用 户 名：</span>
+        <input type="text" class="form-control" v-model="User.UserName">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">支 付 宝：</span>
+        <input type="text" class="form-control" v-model="User.AlipayAccount">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">联系方式：</span>
+        <input type="text" class="form-control" v-model="User.ContactInfo">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">电子邮件：</span>
+        <input type="text" class="form-control" v-model="User.Mail">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">性别：</span>
+        <input type="radio" id="male" value="男" v-model="User.Sex">
+        <label for="male">男</label>        
+        <input type="radio" id="female" value="女" v-model="User.Sex">
+        <label for="female">女</label>
+    </div>
+</form>
 
     <script>
         var app = new Vue({
             el: "#user-form",
             data: {
                 User: {
-                    UserId: "A001",
-                    UserName: "李珊",
-                    AlipayAccount: "18186144331",
-                    ContactInfo: "18186144331",
-                    Mail: "lishan1014@qq.com",
-                    Password: "123",
-                    Sex: null,
+                    UserId: "",
+                    UserName: "",
+                    AlipayAccount: "",
+                    ContactInfo: "",
+                    Mail: "",
+                    Password: "",
+                    Sex: "",
                 },
 
             },
 
         });
+        $.post(
+            "/Users/getInfo",
+            {
+                UserName: getCookie("username")
+            },
+            function (data) {                
+                app.User = JSON.parse(data.user)[0];
+            }
+        )
+
         var app2 = new Vue({
             el: "#info-box",
             data: {

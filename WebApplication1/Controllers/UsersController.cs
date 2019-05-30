@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -43,6 +44,25 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());
+        }
+
+        public IActionResult getInfo(string username)
+        {
+            var users = from p in _context.Users
+                            where p.UserName == username
+                            select new
+                            {
+                                UserId = p.UserId,
+                                UserName = p.UserName,
+                                AlipayAccount = p.AlipayAccount,
+                                ContactInfo = p.ContactInfo,
+                                Mail = p.Mail,
+                                Password = p.Password,
+                                Sex = p.sex
+                            };
+            string getUser = JsonConvert.SerializeObject(users);  //序列化
+            // ViewData["data"] = getList;                                                  // return new JsonResult(new { Data = getList });
+            return new JsonResult(new { state = "success", user = getUser, });
         }
 
         // GET: Users/Details/5

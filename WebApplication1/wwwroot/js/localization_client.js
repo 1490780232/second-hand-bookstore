@@ -347,7 +347,7 @@
      
    	 deg_output+=info+"\r\n";
    	 deg_cnt++;
-     document.getElementById("dbgout").value = deg_output; 
+     //document.getElementById("dbgout").value = deg_output; 
 
    	 if(deg_cnt>10)
    	 {

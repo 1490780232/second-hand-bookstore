@@ -83,22 +83,20 @@ namespace WebApplication1.Controllers
             return getList;
         }
         public IActionResult GetBooks(string category)
-        {
-            var orderList = new Object();
-            if (category =="all") {
-             orderList = (from p in _context.Book                            
-                            select new
-                            {
-                                BookId = p.BookId,
-                                BookName = p.BookName,
-                                BookIbsn = p.BookIbsn,
-                                Author = p.Author,
-                                Press = p.Press,
-                                OriPrice = p.OriPrice,
-                                CurrPrice = p.CurrPrice,
-                            }).Take(10);
-            }
-            else {
+        {            
+            var orderList = (from p in _context.Book
+                             select new
+                             {
+                                 BookId = p.BookId,
+                                 BookName = p.BookName,
+                                 BookIbsn = p.BookIbsn,
+                                 Author = p.Author,
+                                 Press = p.Press,
+                                 OriPrice = p.OriPrice,
+                                 CurrPrice = p.CurrPrice,
+                             }).Take(10);
+        
+            if (category !="all") {
                 orderList = from p in _context.Book
                             where p.category == category
                             select new
