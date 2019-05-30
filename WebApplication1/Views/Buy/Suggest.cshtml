@@ -14,12 +14,13 @@
         <div class="btn-group">
             <span class="btn btn-info">书目导航</span>
         </div>
-        <div class="btn-group"  v-for="nav in navs">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="btn-group"  v-for="nav in navs">        
+            <div type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >                
                 {{ nav.name }} <span class="caret"></span>
-            </button>
+            </div>
             <ul class="dropdown-menu" style="min-width: 100%; text-align: center;">
-                <li  v-for="item in nav.array"><a href="#">{{ item }}</a></li>
+                <li><a href="#" onclick="go(this)">{{ nav.name }} </a></li>
+                <li  v-for="item in nav.array"><a href="#" onclick="go(this)">{{ item }}</a></li>
             </ul>
         </div>    
     </div>
@@ -41,8 +42,8 @@
                 <tbody>
                     <tr v-for="book in books">
                         <th v-for="value in book">
-                            {{ value }}
-                        </th>
+                            <span>{{ value }}</span>
+                        </th>                        
                     </tr>
                 </tbody>
             </table>
@@ -91,27 +92,26 @@
             books: [],
         }
     })
-    function go(category){
+
+    function go(el) {
          $.ajax({
                 url: "/BookQuery/GetBooks",
                 data: {
-                    // bookname: $.trim($bookname.val())
-                    category: category,
+                    category: el.innerText,
                 },
                 type: "post",
                 cache: false,
-                dataType: "text",
+                dataType: "json",
                 success: function (data) {
-                    try {
-                        var tmpData = $.parseJSON(data);
-                        suggest_app.books = data;
+                    if(data.state == "success") {                        
+                        suggest_app.books = $.parseJSON(data.suggest_book);                        
                     }
-                    catch (err) {
-                        alert("数据获取失败:" + err.message);
+                    else{
+                        alert("数据获取失败:" + data.message);
                     }
                 },
-                error: function (response) {
-                    alert("数据获取失败，原因：超时或错误号:" + response.status + ",请稍后再试。");
+                error: function (data) {
+                    alert("数据获取失败，原因：超时或错误号:" + data.state + ",请稍后再试。");
                 }
 
             });
