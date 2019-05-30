@@ -56,6 +56,10 @@
                         <li><a asp-area="" asp-controller="UserCenter" asp-action="Index">个人中心</a></li>
                         <li><a href="javascript:logout()">退出</a></li>
                     </ul>
+                    <ul class="nav navbar-nav pull-right" id="admin-center" style="display: none;">
+                        <li id="hello_admin"><a href="javascript:void(0);"></a></li>
+                        <li><a href="javascript:logout()">退出</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -99,9 +103,12 @@
         if (type == '') {
             $("#login-box").show();
         } else if (type == "users") {
-            $("#personal-center").show();            
+            $("#personal-center").show();
             $("#hello_user > a").text("你好，" + getCookie("username"));
-        };
+        } else if (type == "admin") {
+            $("#admin-center").show();
+            $("#hello_admin > a").text("你好，" + getCookie("username"));
+        }
         var logout = function () {
             document.cookie = "username=;domain=localhost; expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
             document.cookie = "userType=;domain=localhost; expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";

@@ -68,6 +68,7 @@ ViewData["Title"] = "书籍查询结果";
                 cache: false,
                 dataType: "text",
                 success: function (data) {
+
                     try {
                         var tmpData = $.parseJSON(data/*.Data*/);
                         for (var i = 0; i < tmpData.length; i++) {                            

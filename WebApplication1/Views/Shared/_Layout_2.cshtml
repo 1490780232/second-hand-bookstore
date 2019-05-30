@@ -66,6 +66,10 @@
                         <li><a asp-area="" asp-controller="PersonalCenter" asp-action="PersonalCenter">个人中心</a></li>
                         <li><a href="javascript:logout()">退出</a></li>
                     </ul>
+                    <ul class="nav navbar-nav pull-right" id="admin-center" style="display: none;">
+                        <li id="hello_admin"><a href="javascript:void(0);"></a></li>
+                        <li><a href="javascript:logout()">退出</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -120,11 +124,7 @@
         </div>
         <!-- END MAIN -->
         <div class="clearfix"></div>
-        <footer style="position:static">
-            <div class="container-fluid">
-                <p class="copyright">Copyright &copy; 2019.</p>
-            </div>
-        </footer>
+
     </div>
     <!-- END WRAPPER -->
     <!-- Javascript -->
@@ -136,7 +136,10 @@
             $("#login-box").show();
         } else if (type == "users") {
             $("#personal-center").show();
-        };
+        } else if (type == "admin") {
+            $("#admin-center").show();
+            $("#hello_admin > a").text("你好，" + getCookie("username"));
+        }
         var logout = function () {
             //var path_ = "path=/", domain_ = "domain=.baidu.com";
             //document.cookie = cname + "=" + cvalue + "; " + domain_ + "; " + expires + "; " + path_;
