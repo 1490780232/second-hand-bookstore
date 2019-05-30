@@ -137,18 +137,7 @@
             function (data, status) {
                 if(data.state == "success"){
                     alert(data.message);
-                    buyapp.book = {
-                        BookId: "",       
-                        BookName: "",
-                        BookIbsn: "",
-                        Author: "",
-                        Press: "",
-                        OriPrice: "",
-                        CurrPrice: "",
-                        category: "",
-                        userName: "",
-                    };
-                    clearcode();
+                    window.history.go(0)
                 }else{
                     alert(data.message)
                 }

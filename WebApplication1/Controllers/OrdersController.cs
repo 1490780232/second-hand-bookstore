@@ -66,10 +66,13 @@ namespace WebApplication1.Controllers
         public IActionResult Count(string name){
             var buy_num =  _context.Order.Where(x => x.buyerName == name).Count();
             var sell_num = _context.Order.Where(x => x.salerName == name).Count();
-            //var due_num = from p in _context.Book                          
-            //              where 
+            var due_num = (from p in _context.Book
+                           join b in _context.BookStatu
+                           on p.BookId equals b.BookId
+                           where p.userName == name && b.BookStatus == 0
+                           select p).Count();
 
-            return new JsonResult(new { state = "success", buy_num, sell_num });
+            return new JsonResult(new { state = "success", buy_num, due_num });
         }
 
         public async Task<IActionResult> MyOrder(string id)
