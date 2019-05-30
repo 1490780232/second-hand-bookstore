@@ -1,73 +1,63 @@
-﻿
-@{
-    ViewData["Title"] = "书籍查询结果";
+﻿@{
+ViewData["Title"] = "书籍查询结果";
 }
 
 
 
-    <style>
-        #search {
-            text-align: center;
-            float:left;
-        }
-        #hhh{
-            padding-top:30px;
-        }
-        #hhh2 {
-            padding-top: 10px;
-            padding-left: 8px;
-        }
-        
-    </style>
+<style>
+    #col-md-12 {
+        padding-top: 10px;
+        padding-left: 8px;
+    }
 
-    <script type="text/javascript">
-        $(function () {
+    .search-box {
+        max-width: 400px;
+        position: absolute;
+        top: 0;
+        left: 30%;
+    }
+</style>
 
-            function check() {
-                var $bookname = $("#bookname");
-                $('tbody').html("");
-                $.ajax({
-                    url: "/BookQuery/GetData",
-                    data: {
-                        bookname: $.trim($bookname.val())
-                    },
-                    type: "post",
-                    cache: false,
-                    //dataType: "json",
-                    success: function (data) {
-                        try {
-                            var tmpData = $.parseJSON(data/*.Data*/);
-                            for (var i = 0; i < tmpData.length; i++) {
-                                //var newRow = '<tr><td>' + tmpData[i].BookId + '</td><td>'
-                                var newRow = '<tr><td> ' + tmpData[i].BookId + '</td><td>'
-                                    + tmpData[i].BookName + '</td><td>'
-                                    + tmpData[i].BookIbsn + '</td><td>'
-                                    + tmpData[i].Author + '</td><td>'
-                                    + tmpData[i].Press + '</td><td>'
-                                    + tmpData[i].OriPrice + '</td><td>'
-                                    + tmpData[i].CurrPrice + '</td><td></tr>';
-                                $('tbody').append(newRow);
+<div style="position:relative;">
+    <h2>在架书籍查询</h2>
+    <div class="input-group search-box">
+        <span class="input-group-addon" id="basic-addon1">书籍关键字：</span>
+        <input type="text" class="form-control" placeholder="书名/关键字" id="bookname" aria-describedby="basic-addon1">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" id="BookQuery_btn">搜索</button>
+        </span>
+    </div>
 
-                            }
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>书籍编号</th>
+                        <th>书籍名称</th>
+                        <th>ISBN</th>
+                        <th>作者名</th>
+                        <th>出版社</th>
+                        <th>原价</th>
+                        <th>现价</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                        }
-                        catch (err) {
-                            alert("数据获取失败:" + err.message);
-                        }
-                    },
-                    error: function (response) {
-                        alert("数据获取失败，原因：超时或错误号:" + response.status + ",请稍后再试。");
-                    }
+                </tbody>
+            </table>
+            <!-- END BASIC TABLE -->
+        </div>
+    </div>
 
-                });
-            }
-            $("#BookQuery_btn").click(function () { check(); })
+    <a asp-area="" asp-controller="BookQuery" asp-action="ResultDetail" asp-route-id="0003">详细信息未完成</a>
+</div>
 
-        });
-    </script>
-    <script>
-        $(function () {
-            var $bookname = "all";
+<script type="text/javascript">
+    $(function () {
+
+        function check() {
+            var $bookname = $("#bookname");
             $('tbody').html("");
             $.ajax({
                 url: "/BookQuery/GetData",
@@ -76,13 +66,12 @@
                 },
                 type: "post",
                 cache: false,
-                //dataType: "json",
+                dataType: "text",
                 success: function (data) {
 
                     try {
                         var tmpData = $.parseJSON(data/*.Data*/);
-                        for (var i = 0; i < tmpData.length; i++) {
-                            //var newRow = '<tr><td>' + tmpData[i].BookId + '</td><td>'
+                        for (var i = 0; i < tmpData.length; i++) {                            
                             var newRow = '<tr><td> ' + tmpData[i].BookId + '</td><td>'
                                 + tmpData[i].BookName + '</td><td>'
                                 + tmpData[i].BookIbsn + '</td><td>'
@@ -103,37 +92,9 @@
                     alert("数据获取失败，原因：超时或错误号:" + response.status + ",请稍后再试。");
                 }
 
-        });
-    </script>
-        <h3 class="page-title" id="hhh">在架书籍查询</h3>
+            });
+        }
+        $("#BookQuery_btn").click(function () { check(); })
 
-        <span id="search">
-            书籍关键字或书名：
-            <input type="text" id="bookname">
-            <input type="button" id="BookQuery_btn" value="提交" />
-        </span>
-     
-        <div class="row" >
-            <div class="col-md-12" id="hhh2">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>书籍编号</th>
-                            <th>书籍名称</th>
-                            <th>ISBN</th>
-                            <th>作者名</th>
-                            <th>出版社</th>
-                            <th>原价</th>
-                            <th>现价</th>>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       
-                    </tbody>
-                </table>
-                <!-- END BASIC TABLE -->
-            </div>
-        </div>
-
-    <a asp-area="" asp-controller="BookQuery" asp-action="ResultDetail" asp-route-id="0003">详细信息未完成</a>
-
+    });
+</script>

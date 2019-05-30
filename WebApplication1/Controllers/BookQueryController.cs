@@ -78,10 +78,14 @@ namespace WebApplication1.Controllers
                                 OriPrice = p.OriPrice,
                                 CurrPrice = p.CurrPrice
                             };
-            if(bookname == "all")
-            {
-                orderList = from p in _context.Book
-
+            string getList = JsonConvert.SerializeObject(orderList);  //序列化
+            // ViewData["data"] = getList;                                                  // return new JsonResult(new { Data = getList });
+            return getList;
+        }
+        public IActionResult GetBooks(string category)
+        {
+            var orderList = from p in _context.Book
+                            where p.category==category
                             select new
                             {
                                 BookId = p.BookId,
@@ -90,13 +94,13 @@ namespace WebApplication1.Controllers
                                 Author = p.Author,
                                 Press = p.Press,
                                 OriPrice = p.OriPrice,
-                                CurrPrice = p.CurrPrice
+                                CurrPrice = p.CurrPrice,                                
                             };
-            }
-            // var orderList = _context.Order.ToList();
             string getList = JsonConvert.SerializeObject(orderList);  //序列化
-            ViewData["data"] = getList;                                                  // return new JsonResult(new { Data = getList });
-            return getList;
+            // ViewData["data"] = getList;                                                 
+            // return new JsonResult(new { state:"success",message = getList });
+            return new JsonResult(new { state = "success", suggest_book= getList,});
+            // return getList;
         }
     }
 }
