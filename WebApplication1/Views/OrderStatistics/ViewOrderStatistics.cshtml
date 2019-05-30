@@ -7,135 +7,137 @@
 @{ Layout = "../Shared/_layout_2.cshtml"; }
 @model IEnumerable<WebApplication1.Models.OrderStatistics>
 
-    <script>
-        $(function () {
-            var options;
+<script>
+    $(function () {
+        var options;
 
-            var data = {
-                labels: ['2017-08', '2017-09', '2017-10', '2017-11', '2017-12'],
+        var data = {
+            labels: ['2017-08', '2017-09', '2017-10', '2017-11', '2017-12', '2018-01', '2018-02', '2018-03', '2018-04', '2018-05'],
 
-                series: [
-                    [122, 234, 50, 35, 20],
-                ]
-            };
+            series: [
+                [122, 234, 50, 35, 20, 30, 10, 5, 39, 8],
+            ]
+        };
 
-            // line chart
-            options = {
-                height: "300px",
-                showPoint: true,
-                axisX: {
-                    showGrid: false
+        // line chart
+        options = {
+            height: "300px",
+            showPoint: true,
+            axisX: {
+                showGrid: false
+            },
+            lineSmooth: false,
+        };
+
+        new Chartist.Line('#demo-line-chart', data, options);
+
+        // bar chart
+        options = {
+            height: "300px",
+            axisX: {
+                showGrid: false
+            },
+        };
+        var data1 = {
+            labels: ['2017-08', '2017-09', '2017-10', '2017-11', '2017-12', '2018-01', '2018-02', '2018-03', '2018-04', '2018-05'],
+
+            series: [
+                [5, 6, 1, 1, 1, 1, 1, 1, 1, 1],
+            ]
+        };
+
+        new Chartist.Bar('#demo-bar-chart', data1, options);
+
+
+        // area chart
+        options = {
+            height: "270px",
+            showArea: true,
+            showLine: false,
+            showPoint: false,
+            axisX: {
+                showGrid: false
+            },
+            lineSmooth: false,
+        };
+
+        new Chartist.Line('#demo-area-chart', data, options);
+
+
+        // multiple chart
+        var data = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            series: [{
+                name: 'series-real',
+                data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
+            }, {
+                name: 'series-projection',
+                data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],
+            }]
+        };
+
+        var options = {
+            fullWidth: true,
+            lineSmooth: false,
+            height: "270px",
+            low: 0,
+            high: 'auto',
+            series: {
+                'series-projection': {
+                    showArea: true,
+                    showPoint: false,
+                    showLine: false
                 },
-                lineSmooth: false,
-            };
+            },
+            axisX: {
+                showGrid: false,
 
-            new Chartist.Line('#demo-line-chart', data, options);
+            },
+            axisY: {
+                showGrid: false,
+                onlyInteger: true,
+                offset: 0,
+            },
+            chartPadding: {
+                left: 20,
+                right: 20
+            }
+        };
 
-            // bar chart
-            options = {
-                height: "300px",
-                axisX: {
-                    showGrid: false
-                },
-            };
-            var data1 = {
-                labels: ['2017-08', '2017-09', '2017-10', '2017-11', '2017-12'],
-
-                series: [
-                    [5, 6, 1, 1, 1],
-                ]
-            };
-
-            new Chartist.Bar('#demo-bar-chart', data1, options);
-
-
-            // area chart
-            options = {
-                height: "270px",
-                showArea: true,
-                showLine: false,
-                showPoint: false,
-                axisX: {
-                    showGrid: false
-                },
-                lineSmooth: false,
-            };
-
-            new Chartist.Line('#demo-area-chart', data, options);
-
-
-            // multiple chart
-            var data = {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                series: [{
-                    name: 'series-real',
-                    data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
-                }, {
-                    name: 'series-projection',
-                    data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],
-                }]
-            };
-
-            var options = {
-                fullWidth: true,
-                lineSmooth: false,
-                height: "270px",
-                low: 0,
-                high: 'auto',
-                series: {
-                    'series-projection': {
-                        showArea: true,
-                        showPoint: false,
-                        showLine: false
-                    },
-                },
-                axisX: {
-                    showGrid: false,
-
-                },
-                axisY: {
-                    showGrid: false,
-                    onlyInteger: true,
-                    offset: 0,
-                },
-                chartPadding: {
-                    left: 20,
-                    right: 20
-                }
-            };
-
-            new Chartist.Line('#multiple-chart', data, options);
-        });
-    </script>
+        new Chartist.Line('#multiple-chart', data, options);
+    });
+</script>
 
 
 
-    <h3 class="page-title">书籍统计图表</h3>
+<h3 class="page-title">书籍统计图表</h3>
 
-    <h3 class="page-title">统计</h3>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">统计折线图</h3>
-                </div>
-                <div class="panel-body">
-                    <div id="demo-line-chart" class="ct-chart"></div>
-                </div>
+<h3 class="page-title">统计</h3>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">统计折线图</h3>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">统计柱状图</h3>
-                </div>
-                <div class="panel-body">
-                    <div id="demo-bar-chart" class="ct-chart"></div>
-                </div>
+            <div class="panel-body">
+                <div id="demo-line-chart" class="ct-chart"></div>
             </div>
         </div>
     </div>
-    @*<div class="row">
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">统计柱状图</h3>
+            </div>
+            <div class="panel-body">
+                <div id="demo-bar-chart" class="ct-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="row">
         <div class="col-md-6">
             <div class="panel">
                 <div class="panel-heading">
@@ -161,7 +163,7 @@
 
 
 
-    @*</div>*@
+@*</div>*@
 
 
 

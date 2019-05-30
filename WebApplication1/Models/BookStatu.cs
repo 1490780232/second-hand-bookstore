@@ -9,8 +9,8 @@ namespace WebApplication1.Models
         public string BookcaseId { get; set; }
         public int? BookStatus { get; set; }
         public int? CheckStatus { get; set; }
-        public string Rfid { get; set; }
-        public string SellerId { get; set; }
+        //public string Rfid { get; set; }
+        //public string SellerId { get; set; }
         public DateTime? STime { get; set; }
     }
 }

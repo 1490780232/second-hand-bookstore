@@ -155,10 +155,11 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                BookStatu bs = await _context.BookStatu
+                var bs = await _context.BookStatu
                 .FirstOrDefaultAsync(m => m.BookId == id);
                 try
                 {
+                    bs.CheckStatus = 1;
                     _context.Update(bs);
                     await _context.SaveChangesAsync();
                 }
@@ -253,7 +254,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit( [Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice")] Book book)
+        public async Task<IActionResult> Edit( [Bind("BookId,BookName,BookIbsn,Author,OriPrice,Press,CurrPrice,category,userName")] Book book)
         {
 
             if (ModelState.IsValid)
