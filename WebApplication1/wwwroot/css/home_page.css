@@ -16,23 +16,24 @@
                 font-size: 30px;
             }
 
-        .box > .span3 > .img-box {
+        .box > .span3 .img-box {
             height: 150px;
             width: 150px;
             margin: 10px 30px;
+            cursor: pointer;
         }
 
-        .box > .span3 > .img-box-2 {
+        .box > .span3  .img-box-2 {
             padding: 0 25px;
             background-color: #ffffff;
         }
 
-        .box > .span3 > .img-box > img {
+        .box > .span3  .img-box > img {
             width: 100%;
             height: auto;
         }
 
-        .box > .span3 > .img-box + span {
+        .box > .span3  .img-box + span {
             display: inline-block;
             width: 210px;
             text-align: center;

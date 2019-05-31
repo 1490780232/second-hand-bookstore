@@ -90,10 +90,13 @@
     }
     function read() {        
         $.get("/Books/BuyBooks", function (data, status) {
-            console.log("Data: " + data.message + "\nStatus: " + status);
-            buyapp.book = JSON.parse(data.message);
+            //console.log("Data: " + data.message + "\nStatus: " + status);
+            if (data.state == "success")
+                buyapp.book = JSON.parse(data.message);
+            else {
+                alert(data.message);
+            }
         })
-        clearcode()
     }
     function pay() {
         if (getCookie("username") == "") {

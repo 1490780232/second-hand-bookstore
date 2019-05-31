@@ -96,13 +96,13 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">书籍位置：</label>
-                    <label>{{ location }}</label>
+                    <a href="/Books/BookPosition" v-if="location">上架位置</a>
                 </div>
             </div>
 
         </div>
         <div style="position:relative;top:200px">
-            <a class="btn" href="javascript:alert('请尽快将书籍上架');" v-if="new_book.BookName">确认录入</a>
+            <a class="btn" href="javascript:comfirm()" v-if="new_book.BookName">确认录入</a>
         </div>
     </div>
 </div>
@@ -133,7 +133,7 @@
                 category: "",
                 userName: "",                
             },
-            location: "",
+            location: false,
         }
     })
     function commit() {
@@ -152,7 +152,8 @@
             dataType: "json",
             success: function (data) {
                 if (data.state == "success") {
-                    sellapp.new_book = JSON.parse(data.message); 
+                    sellapp.new_book = JSON.parse(data.message);
+                    sellapp.location = true;
                 }
                 else {
                     alert(data.message);
@@ -161,5 +162,8 @@
             },
         });
     }
-
+    function comfirm() {
+        alert('请尽快将书籍上架');
+        //window.history.go(0);
+    }
 </script>

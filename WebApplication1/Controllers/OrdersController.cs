@@ -32,7 +32,7 @@ namespace WebApplication1.Controllers
             _context.Add(my_order);
             BookStatu bs = _context.BookStatu.First(m => m.BookId == my_order.BookId);
             bs.BookStatus = 1;
-            _context.Add(bs);
+            _context.Update(bs);
             if (_context.SaveChanges() > 0)
                 return new JsonResult(new { state = "success", message = "提交成功" });
             else
@@ -72,7 +72,7 @@ namespace WebApplication1.Controllers
                            where p.userName == name && b.BookStatus == 0
                            select p).Count();
 
-            return new JsonResult(new { state = "success", buy_num, due_num });
+            return new JsonResult(new { state = "success", buy_num, sell_num, due_num });
         }
 
         public async Task<IActionResult> MyOrder(string id)

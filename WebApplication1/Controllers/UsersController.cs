@@ -35,17 +35,8 @@ namespace WebApplication1.Controllers
         {
             return View(await _context.Users.ToListAsync());
         }
-        public ActionResult Update(string user)
-        {
-            Users my_user = JsonConvert.DeserializeObject<Users>(user);
-            _context.Add(my_user);
-            if (_context.SaveChanges() > 0)
-                return new JsonResult(new { state = "success", message = "提交成功" });
-            else
-                return new JsonResult(new { state = "faild", message = "提交失败，请重新提交" });
-        }
  
-        public async Task<IActionResult> UserPosition()
+        public async Task<IActionResult> Position()
         {
             return View();
         }
@@ -72,6 +63,16 @@ namespace WebApplication1.Controllers
             string getUser = JsonConvert.SerializeObject(users);  //序列化
             // ViewData["data"] = getList;                                                  // return new JsonResult(new { Data = getList });
             return new JsonResult(new { state = "success", user = getUser, });
+        }
+
+        public IActionResult Update(string user)
+        {
+            Users my_user = JsonConvert.DeserializeObject<Users>(user);
+            _context.Update(my_user);
+            if (_context.SaveChanges() > 0)
+                return new JsonResult(new { state = "success", message = "提交成功" });
+            else
+                return new JsonResult(new { state = "faild", message = "提交失败，请重新提交" });
         }
 
         // GET: Users/Details/5

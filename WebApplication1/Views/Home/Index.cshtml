@@ -22,7 +22,9 @@
             <hr style="margin: 0 0 30px 0;border: 1px solid #999;" />
             <div class="row-fluid box">
                 <div class="span3" v-for="item in hot_books">
-                    <div v-bind:class="item.class" class="img-box"><img v-bind:src="item.src" /></div>
+                    <div v-bind:class="item.class" class="img-box" onclick="jump()">
+                        <img v-bind:src="item.src" />
+                    </div>
                     <span>{{ item.name }}</span>
                 </div>
             </div>
@@ -52,4 +54,7 @@
             ]
         }
     });
+    function jump() {
+        window.location.href = "/Buy/Suggest"
+    }
 </script>

@@ -82,7 +82,7 @@
             $.post(
                 "/Users/Update",
                 {
-                    user: app.User,
+                    user: JSON.stringify(app.User),
                 },
                 function (data) {
                     if (data.state == "success") {

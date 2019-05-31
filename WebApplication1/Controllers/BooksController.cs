@@ -74,7 +74,7 @@ namespace WebApplication1.Controllers
                 };
                 _context.Add(bs);
                 _context.SaveChanges();
-                re.Disconnect();
+                //re.Disconnect();
                 string getBook = JsonConvert.SerializeObject(book1);
                 return new JsonResult(new { state = "success", message = getBook, new_book = getBook});
             }
@@ -95,8 +95,6 @@ namespace WebApplication1.Controllers
             }
 
             List<string> tags = new List<string>();
-            try
-            {
                 string str;
                 TagReadData[] tagda = re.Read(200);
                 if (tagda.Length > 0)
@@ -105,11 +103,6 @@ namespace WebApplication1.Controllers
                     id = str.Substring(4);//.EPCString;
                 }
 
-            }
-            catch
-            {
-                return new JsonResult(new { state = "failed", message = "未读出数据" });
-            }
            
             var book = from p in _context.Book where p.BookId.Contains(id) select p ;
             try
