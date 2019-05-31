@@ -64,6 +64,11 @@ namespace WebApplication1.Controllers
         public IActionResult GetBooks(string category)
         {            
             var orderList = (from p in _context.Book
+                             //这一段是书籍的选择
+                             join b in _context.BookStatu
+                               on p.BookId equals b.BookId
+                             where b.BookStatus == 0 && b.CheckStatus == 1
+                             //
                              select new
                              {
                                  BookId = p.BookId,
@@ -78,6 +83,11 @@ namespace WebApplication1.Controllers
             if (category !="all") {
                 orderList = from p in _context.Book
                             where p.category == category
+                            //这一段是书籍的选择
+                            join b in _context.BookStatu
+                              on p.BookId equals b.BookId
+                            where b.BookStatus == 0 && b.CheckStatus == 1
+                            //
                             select new
                             {
                                 BookId = p.BookId,
