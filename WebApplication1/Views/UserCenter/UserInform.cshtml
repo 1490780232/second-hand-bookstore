@@ -80,13 +80,13 @@
 
         function commit() {
             $.post(
-                "/Users/getInfo",
+                "/Users/Update",
                 {
                     user: app.User,
                 },
                 function (data) {
                     if (data.state == "success") {
-                        alert("提交成功");
+                        alert(data.message);
                     }
                 }
             )
