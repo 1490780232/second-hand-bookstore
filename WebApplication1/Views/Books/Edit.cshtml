@@ -1,7 +1,7 @@
 ﻿@model WebApplication1.Models.Book
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "修改图书";
 }
 @{ Layout = "../Shared/_layout_2.cshtml"; }
 <h2>修改图书</h2>
@@ -10,12 +10,11 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="BookId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>            
             <div class="form-group">
-                <label asp-for="BookName" class="control-label">图书编号</label>
-                <input asp-for="BookName" class="form-control" />
-                <span asp-validation-for="BookName" class="text-danger"></span>
+                <label asp-for="BookId" class="control-label">图书编号</label>
+                <input asp-for="BookId" class="form-control" />
+                <span asp-validation-for="BookId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BookName" class="control-label">图书名称</label>

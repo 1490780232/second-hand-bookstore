@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<WebApplication1.Models.OrderStatistics>
-@{ Layout = "../Shared/_layout_2.cshtml"; }
+@{
+    Layout = "../Shared/_layout_2.cshtml";
+    ViewData["Title"] = "订单统计图";
+}
 @{int a = 0; int b = 0;}
 @foreach (var item in Model)
 {
